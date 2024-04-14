@@ -1,0 +1,26 @@
+  Boolean isSubsetSum(int N, int arr[], int sum){
+         
+        Boolean dp[][] = new Boolean[sum + 1][N + 1];
+        
+        for(int i=0; i<sum+1; i++){
+           Arrays.fill(dp[i], false);
+        }
+        
+        
+        for(int j=0; j<N+1; j++){
+            dp[0][j] = true;
+        }
+        
+        for(int i=1; i<sum+1; i++)
+            {
+                for(int j=1; j<N+1; j++){
+                    if(i < arr[j - 1]){
+                        dp[i][j] = dp[i][j-1];
+                    }else{
+                        dp[i][j] = dp[i][j-1] || dp[i - arr[j-1]][j-1];
+                    }
+                }
+            }
+        
+        return dp[sum][N];
+    }

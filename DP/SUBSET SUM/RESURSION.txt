@@ -1,0 +1,16 @@
+Boolean recursion(int sum, int arr[], int index){
+        
+        if(sum == 0)
+        return true;
+        
+        if(index ==0)
+        return false;
+        
+        return recursion(sum, arr, index - 1) || recursion(sum - arr[index-1], arr, index - 1);
+        
+        
+    }
+    
+     Boolean isSubsetSum(int N, int arr[], int sum){
+        return recursion(sum, arr, N);
+    }

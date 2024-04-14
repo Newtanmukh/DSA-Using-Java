@@ -1,0 +1,33 @@
+    int recursion(int sum, int index, int arr[]){
+        
+        if(sum < 0)
+            return 0;
+        
+        if(sum == 0)
+            return 1;
+        
+        if(index == 0)
+            return 0;
+            
+        return recursion(sum, index - 1, arr) 
+               + recursion(sum - arr[index-1], index - 1, arr);
+        
+        
+    }
+    
+    int equalPartition(int N, int arr[])
+    {
+        int checkSum = 0;
+        
+        for(int i=0; i<N; i++){
+            checkSum = checkSum + arr[i];
+        }
+        
+        if(checkSum%2 == 1)
+            return 0;
+        
+        int sum = checkSum/2;
+        
+        return recursion(sum, N, arr) > 0 ? 1 : 0;
+        
+    }

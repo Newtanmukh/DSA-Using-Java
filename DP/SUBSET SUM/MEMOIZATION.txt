@@ -1,0 +1,34 @@
+ 
+    Boolean memoization(int sum, int arr[], int index, Boolean[][] dp){
+        
+        if(sum < 0 || index < 0)  // the thing is that, let us say in a case that arr[i] kept getting subtracted, then a point will come when the sum < 0 (possibility)
+            return false;
+        
+        if(dp[sum][index])
+            return dp[sum][index];
+        
+        if(sum == 0)
+            return dp[sum][index] = true;
+        
+        if(index ==0)
+             return dp[sum][index] = false;
+        
+         return dp[sum][index] = (memoization(sum, arr, index - 1, dp) 
+                                || memoization(sum - arr[index-1], arr, index - 1, dp));
+        
+        
+    }
+    
+     Boolean isSubsetSum(int N, int arr[], int sum){
+         
+        Boolean dp[][] = new Boolean[sum + 1][N + 1];
+        
+        for(int i=0; i<sum+1; i++){
+            for(int j=0; j<N+1; j++){
+                dp[i][j]= false;
+            }
+            
+        }
+        
+        return memoization(sum, arr, N, dp);
+    }
