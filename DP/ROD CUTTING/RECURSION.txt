@@ -1,0 +1,25 @@
+int recursion(int price[], int len[],  int index, int length){
+        if(length==0 || index == 0)
+            return 0;
+            
+        if(length<0)
+            return Integer.MIN_VALUE;
+        
+        if(length < len[index - 1])
+            return  recursion(price, len,  index - 1, length);
+        
+        return Math.max(recursion(price, len, index - 1, length),
+                                 price[index - 1] + recursion(price, len,  index, length - len[index - 1]));
+    }
+    
+    public int cutRod(int price[], int n) {
+        
+       int[] len = new int[n];
+       
+       for(int i=0; i<n; i++)
+            len[i] = i + 1;
+            
+        
+            
+        return recursion(price, len, n, n);
+    }

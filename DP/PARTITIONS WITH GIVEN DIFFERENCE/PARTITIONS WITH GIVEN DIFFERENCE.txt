@@ -1,0 +1,51 @@
+  public static int countPartitions(int n, int d, int[] arr) {
+        int sum = 0;
+        
+        for(int i=0; i<arr.length; i++){
+            sum  = sum + arr[i];
+        }
+        
+        sum = sum + d;
+        
+        if((sum %2 != 0)  || (sum < d))
+            return 0;
+            
+        sum = sum/2;
+        // sum = Math.min(sum, sum - d);
+
+        int dp[][] = new int[sum + 1][n + 1];
+        
+        for(int i=0; i<sum+1; i++){
+            Arrays.fill(dp[i], 0);
+        }
+        Arrays.fill(dp[0], 1);
+        // dp[0][0] = 1;
+        
+        // int count = 1;
+        
+        // for(int i=0; i<n; i++){
+        //     if(arr[i]==0){
+        //         count = count*2;
+        //         dp[0][i+1] = count;
+        //     }else{
+        //         dp[0][i+1] = dp[0][i];
+        //     }
+        // }
+        
+      
+        
+        int m = (int)1e9 + 7;
+        
+        for(int i=0; i<sum+1; i++){
+            for(int j=1; j<n+1; j++){
+                if(i < arr[j-1]){
+                    dp[i][j] = (dp[i][j-1]) % m;
+                }else{
+                    dp[i][j] = (dp[i][j-1] + dp[i-arr[j-1]][j-1])%m;
+                }
+            }
+        }
+        
+        return dp[sum][n];
+        
+    }

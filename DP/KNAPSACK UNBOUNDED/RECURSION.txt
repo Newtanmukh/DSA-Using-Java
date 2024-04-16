@@ -1,0 +1,24 @@
+ int recursion(int weight, int index, int val[], int wt[]){
+        if(weight ==0 || index ==0)
+            return 0;
+            
+        if(weight < 0)
+            return Integer.MIN_VALUE;
+            
+        if(weight < wt[index - 1])
+            return recursion(weight, index - 1, val, wt);
+            
+        return Math.max(
+                        val[index - 1] + recursion(weight-wt[index-1], index-1, val, wt),
+                        Math.max(
+                                val[index - 1] + recursion(weight-wt[index-1], index, val, wt),
+                                recursion(weight, index - 1, val, wt)
+                            )
+                        );
+    }
+    
+    
+    int knapSack(int N, int W, int val[], int wt[])
+    {
+        return recursion(W, N, val, wt);
+    }

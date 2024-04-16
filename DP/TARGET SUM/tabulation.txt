@@ -1,0 +1,104 @@
+static int findTargetSumWays( int N, int[] arr ,int target) {
+        // code here
+
+        
+        int n = N;
+        
+        int sum = 0;
+        
+        for(int i=0; i<n; i++)
+            sum = sum + arr[i];
+        
+        if((sum + target)%2 != 0)
+            return 0;
+        
+                sum = (sum+target)/2;
+                if(sum<0)
+                sum = (sum - target)/2;
+                
+                int[][] dp = new int[sum+1][N+1];
+                
+                
+        
+
+        for(int i=0; i<sum+1; i++){
+                Arrays.fill(dp[i], 0);
+        }
+        
+        Arrays.fill(dp[0], 1);
+        
+        int mod  = (int)1e9+7;
+        
+        for(int i=0; i<sum+1; i++)
+            {
+                for(int j=1; j<n+1; j++){
+                    if(i<arr[j-1]){
+                        dp[i][j] = (dp[i][j-1])%mod;
+                    }else{
+                        dp[i][j] = (dp[i][j-1] + dp[i-arr[j-1]][j-1])%mod;
+                    }
+                }
+            }
+            
+            
+        return dp[sum][n];
+    }
+
+
+
+
+###################################################################################################################################
+
+
+ static int findTargetSumWays( int N, int[] arr ,int target) {
+        // code here
+
+        
+        int n = N;
+        
+        int sum = 0;
+        
+        for(int i=0; i<n; i++)
+            sum = sum + arr[i];
+        
+        
+        
+        if((sum + target)%2 != 0)
+            return 0;
+        
+        sum = (sum+target)/2;
+        
+        if(sum<0)
+            sum = sum - target;
+        
+        
+        if(sum<0)
+        sum = (sum - target)/2;
+        
+        int[][] dp = new int[sum+1][N+1];
+                
+                
+        
+
+        for(int i=0; i<sum+1; i++){
+            Arrays.fill(dp[i], 0);
+        }
+        
+        Arrays.fill(dp[0], 1);
+        
+        int mod  = (int)1e9+7;
+        
+        for(int i=0; i<sum+1; i++)
+            {
+                for(int j=1; j<n+1; j++){
+                    if(i<arr[j-1]){
+                        dp[i][j] = (dp[i][j-1])%mod;
+                    }else{
+                        dp[i][j] = (dp[i][j-1] + dp[i-arr[j-1]][j-1])%mod;
+                    }
+                }
+            }
+            
+            
+        return dp[sum][n];
+    }
