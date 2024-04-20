@@ -1,11 +1,16 @@
 Boolean recursion(int sum, int arr[], int index){
         
         if(sum == 0)
-        return true;
+        return true; // basically it means that the sum is 0 for some case.
         
         if(index ==0)
-        return false;
+        return false;//it means that u have considered all the cases
         
+	if(sum<arr[index - 1])
+            return recursion(sum, arr, index-1);// it means that , if the sum is smaller than the current coin, just dont consider it and consider the rest of cases.
+						// initially the above condition was not there, so what was happening was, the sum was going negative for many cases, so as a result it was going to index==0 and was returning false.
+						// now by adding this check, we have just reduced some of the redundanct computations (cases where sum<0)
+
         return recursion(sum, arr, index - 1) || recursion(sum - arr[index-1], arr, index - 1);
         
         

@@ -1,0 +1,27 @@
+int mod = (int)1e9 + 7;
+    
+    int recursion(int sum, int index, int[] arr){
+        
+        if(sum==0)
+            return 1;
+            
+        if(index==0)
+            return 0;
+            
+        if(sum<arr[index-1])
+            return (recursion(sum, index-1, arr))%mod;
+        
+        return (recursion(sum, index-1,arr)%mod + recursion(sum-arr[index-1], index-1, arr)%mod%mod)%mod;
+    }
+
+	public int perfectSum(int arr[],int n, int sum) 
+	{ 
+	    
+	    
+	    
+	    return recursion(sum, n, arr);
+	}
+
+
+
+// ABOVE is applicable only for arrays where there are no ZERO Elements.

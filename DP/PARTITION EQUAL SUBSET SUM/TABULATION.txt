@@ -26,6 +26,23 @@ Boolean recursion(int sum, int index, int[] arr){
         int sum = checkSum/2;
         
         
-        return recursion(sum, N, arr)?1:0;
+        Boolean[][] dp = new Boolean[sum + 1][N + 1];
+        
+        for(int i=0; i<sum+1; i++){
+            Arrays.fill(dp[i], false);
+        }
+        
+        Arrays.fill(dp[0], true);
+        
+        for(int i=1; i<sum+1; i++)
+            for(int j=1; j<N+1; j++){
+                if(i<arr[j-1]){
+                    dp[i][j] = dp[i][j-1];
+                }else{
+                    dp[i][j] = dp[i][j-1] || dp[i-arr[j-1]][j-1];
+                }
+        }
+        
+        return dp[sum][N] ? 1 : 0;
         
     }

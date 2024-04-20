@@ -19,3 +19,13 @@ int recursion(int weight, int wt[], int val[], int index){
         
         return profit;
     } 
+
+
+
+
+// NOTE the thing is that here right, ideally we should also check if weight<0 , return INT_MIN. 
+// this is bcoz lets say their values were considered but the weight never summed upto total weight(more than this weight).
+// so in that case even the sum of values were too big it would be considered in the max function , but that is not right.
+// but that case will never come its because let us say that weight becamse very small, then recursion(weight, wt, val, index - 1) will be called always, it means no subsequent weight will be considered. so its sorted anyways.
+
+// same thing in subset sum problem as well.

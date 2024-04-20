@@ -1,0 +1,29 @@
+int memoization(int weight, int index, int val[], int wt[], int[][] dp){
+        
+        
+        
+        if(dp[weight][index]!=-1)
+            return dp[weight][index];
+        
+        if(index==0 || weight==0)
+            return dp[weight][index] = 0;
+            
+        if(weight<wt[index - 1])
+            return  dp[weight][index] = memoization(weight, index-1, val, wt, dp);
+        
+        
+        return dp[weight][index] =     Math.max(val[index-1] + memoization(weight - wt[index - 1], index, val, wt, dp),
+                                                               memoization(weight, index-1, val, wt, dp));
+    }
+   
+    
+    int knapSack(int n, int W, int val[], int wt[])
+    {
+         int[][] dp = new int[W+1][n+1];
+         
+         for(int i=0; i<W+1; i++){
+             Arrays.fill(dp[i], -1);
+         }
+         
+         return memoization(W, n, val, wt, dp);
+    }

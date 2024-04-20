@@ -1,8 +1,7 @@
- 
-    Boolean memoization(int sum, int arr[], int index, Boolean[][] dp){
+Boolean memoization(int sum, int arr[], int index, Boolean[][] dp){
         
-        if(sum < 0 || index < 0)  // the thing is that, let us say in a case that arr[i] kept getting subtracted, then a point will come when the sum < 0 (possibility)
-            return false;
+    // here if dp[sum][index] = true it means we dont need to compute them, if it is false then we need to compute. 
+    // if it is false it might or might not have been computed, we dont know for sure. but atleast it will bring down computations for some of the cases.
         
         if(dp[sum][index])
             return dp[sum][index];
@@ -12,6 +11,9 @@
         
         if(index ==0)
              return dp[sum][index] = false;
+             
+        if(sum<arr[index-1])
+            return dp[sum][index] = memoization(sum, arr, index - 1, dp); 
         
          return dp[sum][index] = (memoization(sum, arr, index - 1, dp) 
                                 || memoization(sum - arr[index-1], arr, index - 1, dp));
@@ -24,11 +26,12 @@
         Boolean dp[][] = new Boolean[sum + 1][N + 1];
         
         for(int i=0; i<sum+1; i++){
-            for(int j=0; j<N+1; j++){
-                dp[i][j]= false;
-            }
-            
+        
+            Arrays.fill(dp[i], false);
         }
+        
+        Arrays.fill(dp[0], true);
+        
         
         return memoization(sum, arr, N, dp);
     }
