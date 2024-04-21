@@ -1,0 +1,31 @@
+long recursion(int sum, int index, int[] coins, long[][]dp){
+        
+        if(dp[sum][index] != -1){
+            return dp[sum][index];
+        }
+        
+        if(sum==0)
+            return dp[sum][index]=(long)1;
+            
+        if(index==0)
+            return dp[sum][index]=(long)0;
+            
+        
+            
+        if(sum < coins[index - 1]){
+            return dp[sum][index] = recursion(sum, index-1, coins, dp);
+        }
+        
+        return dp[sum][index] = recursion(sum - coins[index-1], index,coins, dp) + recursion(sum, index-1, coins, dp);
+        
+    }
+    
+    public long count(int coins[], int n, int sum) {
+        long[][] dp = new long[sum+1][n+1];
+        
+        for(int i=0; i<sum+1; i++){
+            Arrays.fill(dp[i], -1);
+        }
+        
+        return recursion(sum, n, coins, dp);
+    }

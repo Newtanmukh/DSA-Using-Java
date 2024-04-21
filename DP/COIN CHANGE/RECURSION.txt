@@ -1,0 +1,21 @@
+int recursion(int sum, int index, int[] coins){
+        if(sum==0)
+            return 1;
+            
+        if(index==0)
+            return 0;
+            
+        if(sum<0)
+            return 0;
+            
+        if(sum < coins[index - 1]){
+            return recursion(sum, index-1, coins);
+        }
+        
+        return recursion(sum - coins[index-1], index,coins) + recursion(sum, index-1, coins);
+        
+    }
+    
+    public long count(int coins[], int n, int sum) {
+        return recursion(sum, n, coins);
+    }

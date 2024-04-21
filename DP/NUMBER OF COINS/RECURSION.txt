@@ -1,0 +1,30 @@
+int recursion(int sum, int[] coins, int index) {
+    if (sum == 0)
+        return 0;
+
+    if (index == 0)
+        return -1; // Changed to indicate impossibility
+
+    if (sum < coins[index - 1])
+        return recursion(sum, coins, index - 1);
+
+    int withCoin = recursion(sum - coins[index - 1], coins, index );
+    int withoutCoin = recursion(sum, coins, index - 1);
+    
+    if(withCoin!=-1)
+        withCoin++;
+        
+    if(withCoin==-1)
+        return withoutCoin;
+        
+    if(withoutCoin==-1)
+        return withCoin;
+    
+    return Math.min(withCoin, withoutCoin);
+}
+
+    
+	public int minCoins(int coins[], int n, int sum) 
+	{ 
+	   return recursion(sum, coins, n);
+	}

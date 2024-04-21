@@ -1,0 +1,50 @@
+ int recursion(int sum, int[] coins, int index, int[][] dp) {
+         
+         if(dp[sum][index]!=-1)
+            return dp[sum][index];
+         
+    if (sum == 0)
+        return dp[sum][index] = 0;
+
+    if (index == 0)
+        return dp[sum][index] = -1; // Changed to indicate impossibility
+
+ 
+
+    if (sum < coins[index - 1])
+        return dp[sum][index] = recursion(sum, coins, index - 1, dp);
+
+    int withCoin = recursion(sum - coins[index - 1], coins, index, dp);
+    int withoutCoin = recursion(sum, coins, index - 1, dp);
+    
+    if(withCoin!=-1)
+        withCoin++;
+        
+    if(withCoin==-1)
+        return dp[sum][index] = withoutCoin;
+        
+    if(withoutCoin==-1)
+        return dp[sum][index] = withCoin;
+    
+    return Math.min(withCoin, withoutCoin);
+}
+    
+	public int minCoins(int coins[], int n, int sum) 
+	{ 
+	   int[][] dp = new int[sum+1][n+1];
+	   
+	   for(int i=0; i<sum+1; i++){
+	       Arrays.fill(dp[i], -1);
+	   }
+       
+    //   for(int i=1; i<sum+1; i++)
+    //         for(int j=1; j<n+1; j++){
+    //             if(i < coins[j-1]){
+    //                 dp[i][j] = dp[i][j-1];
+    //             }else{
+    //                 dp[i][j] = Math.min(dp[i][j-1], 1 + dp[i-coins[j-1]][j]);
+    //             }
+    //         }
+	   
+	   return recursion(sum, coins, n, dp);
+	} 
