@@ -1,0 +1,28 @@
+static int recursion(String s1, String s2, int index1, int index2, int[][] dp){
+        
+        if(dp[index1][index2]!=-1)
+            return dp[index1][index2];
+        
+        if(index1==0 || index2==0)
+            return dp[index1][index2]= 0;
+        
+        if(s1.charAt(index1-1) == s2.charAt(index2-1))
+            return dp[index1][index2] =  1 + recursion(s1, s2, index1-1, index2-1, dp);
+            
+        return dp[index1][index2] = 
+                        Math.max(recursion(s1,s2,index1-1, index2, dp),
+                        recursion(s1,s2, index1, index2-1, dp));
+        
+    }
+    
+    
+    static int lcs(int x, int y, String s1, String s2)
+    {
+        int[][] dp = new int[x+1][y+1];
+        
+        for(int i=0; i<x+1; i++){
+            Arrays.fill(dp[i], -1);
+        }
+        
+        return recursion(s1, s2, s1.length(), s2.length(), dp);
+    }

@@ -1,0 +1,17 @@
+static int recursion(String s1, String s2, int index1, int index2){
+        if(index1==0 || index2==0)
+            return 0;
+        
+        if(s1.charAt(index1-1) == s2.charAt(index2-1))
+            return 1 + recursion(s1, s2, index1-1, index2-1);
+            
+        return Math.max(recursion(s1,s2,index1-1, index2),
+                        recursion(s1,s2, index1, index2-1));
+        
+    }
+    
+    
+    static int lcs(int x, int y, String s1, String s2)
+    {
+        return recursion(s1, s2, s1.length(), s2.length());
+    }
