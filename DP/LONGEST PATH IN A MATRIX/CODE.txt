@@ -1,0 +1,43 @@
+int solver(int i, int j, int m, int n, int prev, int[][] dp, int[][] matrix){
+        if(i<0 || j< 0 || i>=m || j>=n)
+            return 0;
+            
+        
+        if(matrix[i][j] <= prev)
+            return 0;
+            
+        if(dp[i][j] != -1)
+            return dp[i][j];
+            
+        int a = 1 + solver(i-1, j, m, n, matrix[i][j], dp, matrix);
+        int b = 1 + solver(i, j-1, m, n, matrix[i][j], dp, matrix);
+        int c = 1 + solver(i+1, j, m, n, matrix[i][j], dp, matrix);
+        int d = 1 + solver(i, j+1, m, n, matrix[i][j], dp, matrix);
+        
+        return dp[i][j] =  Math.max(a, Math.max(b, Math.max(c,d)));
+        
+        
+        
+    }
+    
+    public int longestIncreasingPath(int[][] matrix)
+    {
+        int u = matrix.length;
+        int v = matrix[0].length;
+        int[][]dp = new int[u][v];
+        
+        for(int i=0; i<u; i++){
+            Arrays.fill(dp[i], -1);
+        }
+        
+        int maxi = (int)-1e9;
+        int prev = (int)-1e9;
+        for(int i=0; i<u; i++)
+            for(int j=0; j<v; j++){
+                dp[i][j] = solver(i, j, u, v, prev, dp, matrix);
+                maxi = Math.max(maxi, dp[i][j]);
+            }
+            
+        return maxi;
+    }
+    
