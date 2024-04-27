@@ -19,7 +19,8 @@
         long cst = 0;
         
         for(int i=0; i<arr.length; i++){
-            cst = cst + recursion(target-arr[i], arr, numDice-1,dp);
+            cst = cst + recursion(target-arr[i], arr, numDice-1,dp); // we could have done the same way as coin Change problem, but here, the order does matter. think of it as this way, 
+									
         }
         
         return dp[numDice][target] = cst;
