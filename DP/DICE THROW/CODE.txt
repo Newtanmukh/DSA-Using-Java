@@ -1,43 +1,40 @@
- 
-    long recursion(int target, int[] arr, int numDice, long[][] dp){
-        
-        if(target==0 && numDice==0)
+long recursion(int target, int numDices, int[] dices, long[][] dp){
+         if(target==0 && numDices==0)
             return 1;
             
-         if(target<0 || numDice<0)
+        if(target==0 && numDices!=0)
             return 0;
             
-        if(target==0 && numDice!=0)
+        if(target!=0 && numDices==0)
             return 0;
             
-        if(numDice==0 && target!=0)
+        if(target<0 || numDices<0)
             return 0;
             
-        if(dp[numDice][target]!= -1)
-            return dp[numDice][target];
-            
-        long cst = 0;
+        if(dp[target][numDices]!=-1)
+            return dp[target][numDices];
         
-        for(int i=0; i<arr.length; i++){
-            cst = cst + recursion(target-arr[i], arr, numDice-1,dp); // we could have done the same way as coin Change problem, but here, the order does matter. think of it as this way, 
-									
+        long cst=0;
+        for(int i=0; i<dices.length; i++){
+            cst = cst + recursion(target-dices[i], numDices-1, dices, dp);
         }
         
-        return dp[numDice][target] = cst;
-        
-    }
+       return dp[target][numDices] = cst;
+     }
     
      long noOfWays(int M , int N , int X) {
         
-        int[] arr = new int[M];
+        int[] dices = new int[M];
+        
         for(int i=0; i<M; i++){
-            arr[i] = i+1;
+            dices[i] = i+1;
         }
         
-        long[][] dp = new long[N+1][X+1];
+        long[][] dp = new long[X+1][N+1];
         
-        for(int i=0; i<N+1; i++){
+        for(int i=0; i<X+1; i++){
             Arrays.fill(dp[i], -1);
         }
-        return recursion(X, arr, N, dp);
+        
+        return recursion(X, N, dices, dp);
     }
