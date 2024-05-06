@@ -1,0 +1,38 @@
+ int mod = (int)1e9+7;
+    
+    public int decode(int i, String s, int[] dp){
+        
+     if(i==s.length()){
+         return 1;
+     }
+     
+     if(dp[i] != -1){
+         return dp[i];
+     }
+     
+     int choice1=0;
+     int choice2=0;
+     
+     if(s.charAt(i) >= '1' &&   '9'  >= s.charAt(i)){
+         choice1 = decode(i+1, s, dp);
+     }
+     
+     if(i+2 <= s.length()){
+         String sub = s.substring(i, i+2);
+         
+         if(sub.compareTo("10") >= 0 && sub.compareTo("26") <= 0){
+                choice2 = decode(i+2, s, dp); 
+            }
+            
+     }
+     
+     return dp[i] = (choice1 + choice2) % mod;
+      
+    }
+    
+    public int CountWays(String str)
+    {
+        int[] dp = new int[str.length()];
+        Arrays.fill(dp, -1);
+        return decode(0, str, dp);
+    }
