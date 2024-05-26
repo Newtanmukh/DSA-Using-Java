@@ -1,0 +1,40 @@
+class GfG
+{
+    static int[] dp = new int[1000001];
+    
+    static int fun(int arr[], int n, int i){
+        if(i+3>=n)
+            return 0;
+            
+        if(dp[i]!=-1)
+            return dp[i];
+            
+        int a= arr[i]+ fun(arr, n, i+1);
+        int b= arr[i+1]+ fun(arr, n, i+2);
+        int c= arr[i+2]+ fun(arr, n, i+3);
+        int d= arr[i+3]+ fun(arr, n, i+4);
+        
+        
+        return dp[i]= Math.min(a, Math.min(b,Math.min(c,d)));
+    }
+    
+	public static int minSum(int arr[], int n)
+        {
+            if(n<5){
+                int min = arr[0];
+                
+                for(int i=0; i<n; i++){
+                    min = Math.min(min, arr[i]);
+                }
+                
+                return min;
+            }
+            
+            
+            
+            Arrays.fill(dp, -1);
+            
+            return fun(arr, n, 0);
+            
+        }
+}

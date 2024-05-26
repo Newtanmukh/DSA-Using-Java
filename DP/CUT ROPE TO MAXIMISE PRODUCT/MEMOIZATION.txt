@@ -1,0 +1,37 @@
+class Solution {
+    
+     long memoization(int n, long[] dp){
+            
+           if(1>=n)
+                return 0;
+            if(n==2)
+                return 1;
+                
+            long maxProd = 0;
+            
+            if(dp[n]!=-1)
+                return dp[n];
+            
+            for(int i=1; i<n+1; i++){
+                long singleCut = i*(n-i);
+                long multipleCuts = i*memoization(n-i, dp);
+                maxProd = Math.max(maxProd, Math.max(singleCut, multipleCuts));
+            }
+        return dp[n] = maxProd;
+     }
+    
+     long  maxProduct(int n) {
+        
+        if(1>=n)
+            return 0;
+            
+        long[] dp = new long[n+1];
+        Arrays.fill(dp, -1);
+        
+        dp[0] = dp[1] = 0;
+        dp[2] = 1;
+        
+        return memoization(n, dp);
+        
+     }
+}
