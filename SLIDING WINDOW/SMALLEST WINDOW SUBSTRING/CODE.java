@@ -1,39 +1,41 @@
 public int findSubString( String s) {
-        HashSet<Character> hashSet = new HashSet<>();
-        Integer n = s.length();
+      HashSet<Character> uniqueCharsSet = new HashSet<>();
+        int n = s.length();
         
-        for(Integer i=0; i<n; i++){
-            hashSet.add(s.charAt(i));
+        // Step 1: Identify all unique characters in the string
+        for (int i = 0; i < n; i++) {
+            uniqueCharsSet.add(s.charAt(i));
         }
         
-        Integer uniqueSize = hashSet.size();
+        int uniqueSize = uniqueCharsSet.size();
+        int minLength = Integer.MAX_VALUE;
         
-        Integer len = Integer.MAX_VALUE;
-        Integer i = 0;
-        Integer j = 0;
+        int left = 0;
+        int right = 0;
         
-        HashMap<Character, Integer> hashMap = new HashMap<>();
+        HashMap<Character, Integer> charCountMap = new HashMap<>();
         
-        while(j < n){
-            Character lastChar = s.charAt(j);
-            hashMap.put(lastChar, hashMap.getOrDefault(lastChar, 0) + 1);
+
+        while (right < n) {
+            char rightChar = s.charAt(right);
+            charCountMap.put(rightChar, charCountMap.getOrDefault(rightChar, 0) + 1);
             
-            
-            while(hashMap.size() == uniqueSize){
+          
+            while (charCountMap.size() == uniqueSize) {
+                minLength = Math.min(minLength, right - left + 1);
                 
-                len = Math.min(len, j-i+1);
-                
-                Character firstChar = s.charAt(i);
-                hashMap.put(firstChar, hashMap.get(firstChar) - 1);
-                
-                if(hashMap.get(firstChar)==0){
-                    hashMap.remove(firstChar);
+                char leftChar = s.charAt(left);
+                if (charCountMap.get(leftChar) == 1) {
+                    charCountMap.remove(leftChar);
+                } else {
+                    charCountMap.put(leftChar, charCountMap.get(leftChar) - 1);
                 }
                 
-                i++;
+                left++;
             }
             
-            j++;
+            right++;
         }
-        return len;
+        
+        return minLength;
     }
