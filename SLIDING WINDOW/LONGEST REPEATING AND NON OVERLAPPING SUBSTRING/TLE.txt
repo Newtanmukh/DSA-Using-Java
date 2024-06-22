@@ -1,0 +1,21 @@
+ static String longestSubstring(String s, int n) {
+        
+        String resultedString = "";
+        
+        for(int i=0; i<n; i++){
+            
+            String temp = "";
+            for(int j=i; j<n; j++){
+                temp = temp + s.charAt(j);
+                //whatever temp is made till now, check if is occuring from j+1 index onwards as well. if yes, then if the length is greater, update it
+                
+                if(s.indexOf(temp, j+1)!=-1){
+                    if(temp.length() > resultedString.length()){
+                        resultedString = temp;
+                    }
+                }
+            }
+        }
+        
+         return resultedString==""?"-1":resultedString;
+    }
