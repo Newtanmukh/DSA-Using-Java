@@ -1,0 +1,27 @@
+
+class Solution{
+  public static void main(String[] args) throws Exception {
+        System.out.println(LocalDate.of(2026, 9, 12));
+
+
+        LocalDate date = LocalDate.ofYearDay(2023, 264);
+
+        System.out.println(date.getDayOfMonth());
+        System.out.println(date.getDayOfWeek());
+        System.out.println(date.getDayOfYear());
+
+        System.out.println(date.getMonth());
+        System.out.println(date.getMonthValue());
+
+        date = LocalDate.parse("19-08-2025", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        String newData = date.format(DateTimeFormatter.ofPattern("yyyy_MMM_dd"));
+
+        System.out.println(newData);
+
+
+        newData = date.format(DateTimeFormatter.ofPattern("yyyy_MM_dd"));
+
+        System.out.println(newData);
+    }
+}

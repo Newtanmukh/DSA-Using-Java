@@ -1,0 +1,36 @@
+class Solution{
+    
+    long[] dp ;
+    
+     long recursion(int lengthOfTile){
+        
+        if(lengthOfTile == 0)
+            return 1;
+            
+        if(lengthOfTile < 0)
+            return 0;
+            
+        if(dp[lengthOfTile]!=-1)
+            return dp[lengthOfTile];
+            
+        long tilesHorizontal = recursion(lengthOfTile - 4);
+        long tilesVertical = recursion(lengthOfTile - 1);
+        
+        /*
+        **********************************     *
+        **********************************     *
+        **********************************     *
+        **********************************     *
+        */
+        
+        return dp[lengthOfTile] = tilesVertical  + tilesHorizontal;
+    }
+    
+     long arrangeTiles(int N){
+        
+        dp = new long[N+1];
+        
+        Arrays.fill(dp, -1);
+        return recursion(N);
+    }
+}

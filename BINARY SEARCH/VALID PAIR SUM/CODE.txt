@@ -1,0 +1,40 @@
+class Solution 
+{ 
+     long ValidPair(int arr[], int n) 
+	{ 
+	    Arrays.sort(arr);
+	    long num = 0;
+	    
+	    for(int i=n-1; i>=1; i--){
+	        int rightIndexForBinarySearch = i-1;
+	        int leftIndexForBinarySearch = 0;
+	        
+	        int target = arr[i];
+	        int index = binarySearch(target, leftIndexForBinarySearch, rightIndexForBinarySearch, arr);
+	        if(index!=-1){
+	            num += (i - index);
+	        }
+	    }
+	    
+	    return num;
+	}
+	
+	int binarySearch(int num, int left, int right, int[] arr){
+	    
+	    int retIndex = -1;
+	    
+	    while(left<=right){
+	        int mid = left + (right - left)/2;
+	        
+	        if(arr[mid] + num>0){
+	            retIndex = mid;
+	            right = mid - 1;
+	        }else{
+	            left = mid + 1;
+	        }
+	    }
+	    
+	    return retIndex;
+	    
+	}
+} 

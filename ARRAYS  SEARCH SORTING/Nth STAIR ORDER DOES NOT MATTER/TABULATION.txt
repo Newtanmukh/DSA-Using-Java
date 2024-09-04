@@ -1,0 +1,20 @@
+ long arrangeTiles(int N){
+        
+        dp = new long[N+1];
+        
+        Arrays.fill(dp, -1);
+        
+        if(N<=3)
+            return 1;
+        
+        dp[0] = 1;
+        dp[1] = 1;
+        dp[2] = 1;
+        dp[3] = 1;
+        
+        for(int i=4; i<N+1; i++){
+            dp[i] = dp[i-1] + dp[i-4];
+        }
+        
+        return dp[N];
+    }

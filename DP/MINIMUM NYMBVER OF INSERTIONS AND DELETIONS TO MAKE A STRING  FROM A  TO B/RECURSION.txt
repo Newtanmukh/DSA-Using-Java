@@ -1,0 +1,22 @@
+class Solution
+{
+    int returnMaxCommonlength(String s, String t, int index1, int index2){
+        if(index1==0||index2==0)
+            return 0;
+            
+        if(s.charAt(index1-1)==t.charAt(index2-1)){
+            return 1 + returnMaxCommonlength(s, t, index1-1, index2-1);
+        }
+        
+        return Math.max(returnMaxCommonlength(s, t, index1-1, index2),
+                        returnMaxCommonlength(s, t, index1, index2-1));
+    }
+    
+	public int minOperations(String s, String t) 
+	{ 
+	    int m = s.length();
+	    int n = t.length();
+	    
+	    return m + n - 2*returnMaxCommonlength(s, t, m, n);
+	} 
+}

@@ -1,0 +1,19 @@
+https://www.geeksforgeeks.org/problems/count-ways-to-nth-stairorder-does-not-matter5639/1
+
+
+class Solution {
+    
+    
+    
+    public int nthStair(int n) {
+        if(n%2==0){
+            int x = n/2;
+            //now each of these x, you can make it to two 1 1.
+            // so one case is all 2's, second case is only (x-1) 2's and rest 1 and so on. so total cases = x+1;
+            return x+1;
+        }else{
+            int x = (n-1)/2;
+            return x+1; 
+        }
+    }
+}
