@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> generate(int n) {
+       List<List<Integer> >list = new ArrayList<>();
+
+       list.add(new ArrayList<>(Arrays.asList(1)));
+        
+       for(int i=1; i<n; i++){
+            int x = i + 1;
+             List<Integer> previousList = list.get(i-1);
+
+            List<Integer> newList = new ArrayList<>();
+            newList.add(1);
+            for(int j=0; j<x-2; j++){
+                newList.add(previousList.get(j) + previousList.get(j+1));
+            }
+            newList.add(1);
+            list.add(newList);
+       }
+
+       return list;
+
+    }
+}

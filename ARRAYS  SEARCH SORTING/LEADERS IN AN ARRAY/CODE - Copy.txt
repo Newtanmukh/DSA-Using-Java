@@ -1,0 +1,22 @@
+
+class Solution {
+    // Function to find the leaders in the array.
+     ArrayList<Integer> leaders(int n, int arr[]) {
+       Integer rightMaxTillNow = -1;
+       
+       ArrayList<Integer> list = new ArrayList<>();
+       
+       for(int i = n-1; i>=0; i--){
+           if(arr[i]>=rightMaxTillNow){
+               list.add(arr[i]);
+           }
+           
+           rightMaxTillNow = Math.max(rightMaxTillNow, arr[i]);
+       }
+       
+       Collections.reverse(list);
+       
+       return list;
+    }
+}
+

@@ -1,0 +1,82 @@
+class Solution {
+    public int robotSim(int[] commands, int[][] obstacles) {
+
+            //NOTE : Bascially before even hitting the obstacle, just discontinue there.
+
+        HashSet<String> hashSet = new HashSet<>();
+        for(int[] obstacle: obstacles){
+            hashSet.add(obstacle[0] + "|" + obstacle[1]);
+        }
+
+        int maxDistance = -1;
+
+        boolean north = true;
+        boolean south = false;
+        boolean east = false;
+        boolean west = false;
+
+        int x = 0;
+        int y = 0;
+
+        for(int command: commands){
+            if(command==-2){
+                if(north){
+                    north = false;
+                    west = true;
+                }else if(east){
+                    east = false;
+                    north = true;
+                }else if(south){
+                    south = false;
+                    east = true;
+                }else{
+                    west = false;
+                    south = true;
+                }
+            }else if(command == -1){
+                if(north){
+                    north = false;
+                    east = true;
+                }else if(east){
+                    east = false;
+                    south = true;
+                }else if(south){
+                    south = false;
+                    west = true;
+                }else{
+                    west = false;
+                    north = true;
+                }
+            }else{
+                if(north){
+                    while(command > 0 && !hashSet.contains(x + "|" + (y+1))){
+                        y =  y+1;
+                        command--;
+                    }
+                }else if(south){
+                     while(command > 0 && !hashSet.contains(x + "|" + (y-1))){
+                        y =  y-1;
+                        command--;
+                    }
+                }else if(east){
+                     while(command > 0 && !hashSet.contains((x + 1) + "|" + y)){
+                        x = x + 1;
+                        command--;
+                    }
+                }else{
+                    while(command > 0 && !hashSet.contains((x - 1) + "|" + y)){
+                        x = x - 1;
+                        command--;
+                    }
+                }
+
+                maxDistance = Math.max(maxDistance, x*x + y*y);
+            }
+        }
+
+        return maxDistance;
+
+    }
+
+
+}

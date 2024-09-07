@@ -1,0 +1,35 @@
+class Solution {
+    public int[] missingRolls(int[] rolls, int mean, int n) {
+        int missing = n;
+        int m = rolls.length;
+
+        int total = (n+m) * mean;
+        int[] missingObservations = new int[n];
+        int totalSum = 0;
+        for(int roll: rolls)
+            totalSum += roll;
+
+        int remaining  = total - totalSum;
+
+        if(remaining > 6*missing || remaining < missing)
+            return new int[0];
+
+        Arrays.fill(missingObservations, 1);
+        remaining = remaining - n;
+
+        for(int i=0; i<missingObservations.length; i++){
+            if(remaining==0)
+                break;
+            if(remaining>=5){
+                missingObservations[i] += 5;
+                remaining = remaining - 5; 
+            }else{
+                missingObservations[i] += remaining;
+                remaining = 0;
+                break;
+            }
+        }
+        return missingObservations;
+
+    }
+}

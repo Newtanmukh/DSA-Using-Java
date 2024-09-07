@@ -1,0 +1,53 @@
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int t) {
+        //Just like u reduced 3 sum to 2 sum, similarly reduce 4 sum to 3 sum to 2 sum.
+
+        long target = (long) t;
+        Arrays.sort(nums);
+
+        List<List<Integer>> list = new ArrayList<>();
+        int n = nums.length;
+        for(int i=0; i<n-3; i++)
+            {
+                if(i>0 && nums[i]==nums[i-1])
+                    continue;
+            for(int j=i+1; j<n-2; j++){
+                int low = j+1;
+                int high = n - 1;
+                if(j>i+1 && nums[j]==nums[j-1])
+                    continue;
+                
+                while(low<high){
+                    long sum = (long)nums[i] + (long)nums[j] + (long)nums[low] + (long)nums[high];
+                    if(sum==target){
+                        List<Integer> newList = new ArrayList<>();
+                        newList.add(nums[i]);
+                        newList.add(nums[j]);
+                        newList.add(nums[low]);
+                        newList.add(nums[high]);
+                        list.add(newList);
+
+
+                        int l = nums[low];
+                        int h = nums[high];
+
+                        while(low<high && nums[low]==l){
+                            low++;
+                        }
+
+                        while(low<high && nums[high]==h){
+                            high--;
+                        }
+                    }else if(sum > target){
+                        high--;
+                    }else{
+                        low++;
+                    }
+                }
+            }
+    }
+
+            return list;
+
+    }
+}

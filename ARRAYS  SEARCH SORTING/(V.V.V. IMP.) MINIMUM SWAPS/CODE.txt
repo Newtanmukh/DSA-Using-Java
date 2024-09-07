@@ -1,0 +1,54 @@
+
+class Solution
+{
+    class Pair{
+        int val;
+        int index;
+        
+        Pair(int val, int index){
+            this.val = val;
+            this.index = index;
+        }
+    }
+    
+    public int minSwaps(int nums[])
+    {
+        List<Pair> list = new ArrayList<>();
+        
+        for(int i=0; i<nums.length; i++){
+            list.add(new Pair(nums[i], i));
+        }
+        
+        Collections.sort(list, new Comparator<Pair>(){
+            @Override
+            public int compare(Pair lhs, Pair rhs){
+                return Integer.compare(lhs.val, rhs.val);
+            }
+        });
+        
+       int count = 0;
+       
+       for( int i=0; i<list.size(); i++){
+           Pair pair = list.get(i);
+           if(pair.index==i){
+               continue;
+           }
+           
+           count++;
+           swap(list, i, pair.index);
+           i--;
+       }
+       
+       return count;
+       
+        
+    }
+    
+    public void swap(List<Pair> list, int i, int j){
+        Pair first = list.get(i);
+        Pair second = list.get(j);
+        
+        list.set(i, second);
+        list.set(j, first);
+    }
+}

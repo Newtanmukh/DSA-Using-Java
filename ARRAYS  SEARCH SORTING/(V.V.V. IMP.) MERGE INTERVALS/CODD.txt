@@ -1,0 +1,55 @@
+class Solution {
+    public int[][] merge(int[][] arr) {
+        //why do we sort using the start Time ? 
+
+        List<List<Integer>> list = new ArrayList<>();
+
+        Arrays.sort(arr, new Comparator<>(){
+            @Override
+            public int compare(int[] lhs, int[] rhs){
+                if(lhs[0] < rhs[0]){
+                    return -1;
+                }
+
+                if(lhs[0]==rhs[0]){
+                    return 0;
+                }
+
+                return 1;
+
+                // return Integer.compare(lhs[0], rhs[0]);
+            }
+        });
+
+        list.add(new ArrayList<>(Arrays.asList(arr[0][0], arr[0][1])));
+
+        for(int i=1; i<arr.length; i++){
+            int[] interval = arr[i];
+            int startTime = interval[0];
+            int endTime = interval[1];
+
+            if(startTime <= list.get(list.size() - 1).get(1)){
+                int newStartTime = list.get(list.size()-1).get(0);
+                int newEndTime = Math.max(list.get(list.size()-1).get(1), endTime);
+
+                list.set(list.size()-1,
+                                            new ArrayList<>(Arrays.asList(newStartTime, newEndTime)) 
+                                            );
+            }else{
+                list.add(new ArrayList<>(Arrays.asList(startTime, endTime)));
+            }
+        }
+
+        int size = list.size();
+        int[][] dp = new int[size][2];
+
+        for(int i=0; i<size; i++){
+            List<Integer> x = list.get(i);
+            dp[i][0] = x.get(0);
+            dp[i][1] = x.get(1); 
+        }
+
+        return dp;
+        
+    }
+}

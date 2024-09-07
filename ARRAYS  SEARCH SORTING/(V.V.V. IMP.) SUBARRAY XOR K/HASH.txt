@@ -1,0 +1,25 @@
+public class Solution {
+    public int solve(int[] A, int B) {
+        
+        int xor = 0;
+        
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        int count = 0;
+        for(int a: A){
+            xor = xor^a;
+            
+            if(xor==k)
+                count++;
+            
+            int find = xor^k;
+            if(hashMap.get(find)!=null){
+                count = hashMap.get(find) + count;
+            }
+            
+            hashMap.put(xor, hashMap.getOrDefault(x, 0) + 1);
+        }
+        
+        return count;
+        
+    }
+}

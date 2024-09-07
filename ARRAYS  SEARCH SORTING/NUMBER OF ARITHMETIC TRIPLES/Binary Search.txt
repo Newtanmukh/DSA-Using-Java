@@ -1,0 +1,23 @@
+
+//https://leetcode.com/problems/number-of-arithmetic-triplets/solutions/5049086/5-method-s-c-java-python-beginner-friendly/
+
+class Solution {
+    public int arithmeticTriplets(int[] nums, int diff) {
+        int count = 0;
+
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+
+        for(int num: nums){
+            int smallest = hashMap.getOrDefault(num-2*diff, 0);
+            int middle = hashMap.getOrDefault(num-diff, 0);
+            int largest = hashMap.getOrDefault(num, 0);
+
+            if(largest==0 && middle>0 && smallest>0){
+                count++;
+            }
+            hashMap.put(num, largest+1);
+        }
+
+        return count;
+    }
+}
