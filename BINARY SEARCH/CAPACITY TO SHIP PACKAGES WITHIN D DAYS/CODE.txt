@@ -1,0 +1,63 @@
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int minCapacityOfShip = getMinCapacity(weights);
+        int maxWeightOfShip = minCapacityOfShip;
+        int maxCapacityOfShip = getMaxCapacity(weights);
+        int ans = Integer.MAX_VALUE;
+
+        while(minCapacityOfShip <= maxCapacityOfShip){
+            int mid = minCapacityOfShip + (maxCapacityOfShip - minCapacityOfShip)/2;
+
+            // if(mid < maxWeightOfShip){  // NOTE : we will never encounter this case, since the minCapacity itself is the max weight of the ship
+            //     minCapacityOfShip = mid + 1;
+            // }
+            if(daysToShip(weights, mid) <= days){
+                ans = Math.min(mid, ans);
+                maxCapacityOfShip = mid - 1;
+            }else{
+                minCapacityOfShip = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+
+    public int daysToShip(int[] weights, int capacity){
+        int minDays = 1;
+
+        int filled = 0;
+        for(int weight: weights){
+            
+            if(weight + filled > capacity){
+                filled = 0;
+                minDays++;
+            }
+            
+            filled = filled + weight;
+            
+        }
+
+        return minDays;
+    }
+
+
+    public int getMaxCapacity(int[] weights){
+        int sum = 0;
+
+        for(int weight: weights){
+            sum += weight;
+        }
+
+        return sum;
+    }
+
+    public int getMinCapacity(int[] weights){
+        int mini = -1;
+
+        for(int weight: weights){
+            mini = Math.max(mini, weight);
+        }
+
+        return mini;
+    }
+}

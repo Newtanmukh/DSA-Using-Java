@@ -1,0 +1,50 @@
+class Solution {
+    public int searchInsert(int[] arr, int target) {
+        int index = -1;
+
+        int low = 0;
+        int high = arr.length - 1;
+
+        while(low<=high){
+            int mid = low + (high - low)/2;
+
+            if(arr[mid]==target){
+                return mid;
+            }else if(arr[mid] < target){
+                index = mid;
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+
+        return low;
+    }
+}
+
+//////////////////////////////
+
+class Solution {
+    public int searchInsert(int[] arr, int x) {
+        int index = -1;
+
+        int low = 0;
+        int high = arr.length - 1;
+
+        if(x>arr[high])
+            return high+1;
+
+        while(low<=high){
+            int mid = low + (high - low)/2;
+
+            if(arr[mid] >= x){
+                index = mid;
+                high = mid - 1;
+            }else{
+                low = mid + 1;
+            }
+        }
+
+        return index;
+    }
+}

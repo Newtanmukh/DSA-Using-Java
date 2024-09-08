@@ -1,0 +1,21 @@
+import java.util.Arrays;
+
+class Solution {
+    public int findMEX(int[] arr) {
+        // Sort the array
+        Arrays.sort(arr);
+        
+        // Initialize mex to 0 (starting point for checking)
+        int mex = 0;
+
+        // Traverse through the sorted array
+        for (int num : arr) {
+            if (num == mex) {
+                mex++;  // If num equals mex, increment mex and keep checking
+            }
+        }
+        
+        // Return the first missing non-negative integer
+        return mex;
+    }
+}

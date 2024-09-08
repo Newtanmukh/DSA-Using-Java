@@ -1,0 +1,41 @@
+class Solution {
+    public int smallestDivisor(int[] nums, int threshold) {
+        int smallestDivisor = 1;
+        int largestDivisor = getMaxDivisor(nums);
+        int ans = Integer.MAX_VALUE;
+        while(smallestDivisor <= largestDivisor){
+            int mid = smallestDivisor + (largestDivisor - smallestDivisor)/2;
+
+            int result = getResult(nums, mid);
+            if(result<=threshold){
+                ans = Math.min(ans, mid);
+                largestDivisor = mid - 1;
+            }else{
+                smallestDivisor = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+
+    public int getResult(int[] nums, int divisor){
+        int sum = 0;
+        for(int num: nums){
+            sum = sum + (num/divisor);
+            if(num%divisor!=0){
+                sum++;
+            }
+        }
+        return sum;
+    }
+
+    public int getMaxDivisor(int[] nums){
+        int maxi = -1;
+
+        for(int num: nums){
+            maxi = Math.max(num, maxi);
+        }
+
+        return maxi+1;
+    }
+}

@@ -1,0 +1,85 @@
+//https://www.spoj.com/problems/AGGRCOW/
+
+
+
+import java.util.*;
+import java.lang.*;
+
+class Main
+{
+	public static int getMinDistance(int[] positions, int cows){
+		int minDistance = 1;	
+		int maxDistance = getMaxDistance(positions);
+		int maximum =-1;
+		
+		while(minDistance <= maxDistance){
+			int mid = minDistance + (maxDistance - minDistance)/2;
+			
+			if(isPlaced(positions, mid, cows)){
+				maximum = Math.max(maximum, mid);
+				minDistance = mid + 1;
+			}else{
+				maxDistance = mid - 1;
+			}
+		}
+		
+		return maximum;
+	}
+	
+	public static boolean isPlaced(int[] positions, int minDistance, int cows){
+		int count = 1;
+		int prev = positions[0];
+		
+		for(int i=1; i<positions.length; i++){
+			if(positions[i]-prev>=minDistance){
+				count++;
+				prev = positions[i];
+			}
+			
+			if(count==cows){
+				return true;
+			}
+		}
+		
+		if(count==cows){
+				return true;
+			}
+		return false;
+	}
+	
+	public static int getMaxDistance(int[] position){
+		// int sum = 0;
+		
+		// for(int num: position){
+		// 	sum += num;
+		// }
+		
+		return position[position.length - 1] - position[0];
+	} 
+	
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner in = new Scanner(System.in);
+		int t = in.nextInt();
+		
+		while(t > 0){
+			int n = 0;
+			int c = 0;
+			
+			n = in.nextInt();
+			c = in.nextInt();
+			
+			int[] position = new int[n];
+			
+			for(int i=0; i<n; i++){
+				position[i] = in.nextInt();
+			}
+			
+			Arrays.sort(position);
+			
+			System.out.println(getMinDistance(position, c));
+			
+			t--;
+		}
+	}
+}

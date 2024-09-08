@@ -1,0 +1,68 @@
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static int findLargestMinDistance(ArrayList<Integer> boards, int k)
+    {
+         int[] nums = new int[boards.size()];
+
+         for(int i=0; i<boards.size(); i++){
+             nums[i] = boards.get(i); 
+         }
+
+         long low = getMinValue(nums);
+         long high = getMaxValue(nums);
+
+         long ans = high;
+
+         while(low <= high){
+            long mid = low + (high - low)/2;
+            if(isSplitValid(nums, mid, k)){
+                ans = Math.min(ans, mid);
+                high = mid - 1;
+            }else{
+                low = mid + 1;
+            }
+         }
+
+         return (int)ans;
+    }
+
+     public static long getMinValue(int[] nums){
+        long ans = -1l;
+        for(int num: nums){
+            ans = Math.max(num, ans);
+        }
+
+        return ans;
+    }
+
+    public static long getMaxValue(int[] nums){
+        long ans = 0l;
+
+        for(int num:nums){
+            ans = ans + (long) num;
+        }
+
+        return ans;
+    }
+
+    public static boolean isSplitValid(int[] nums, long maxSubarraySum, int k){
+        long totalSum = 0l;
+        int count = 1;
+
+        for(int i=0; i<nums.length; i++){
+            if((long)(totalSum + nums[i]) > maxSubarraySum){
+                count++;
+                totalSum = 0l;
+            }
+
+            totalSum = totalSum + (long)nums[i];
+
+            if(count>k)
+                return false;
+        }
+
+        return true;//even if the number were less than k we return true. this is because then in the binary search we will keep searching for lower values then.
+    }
+}
