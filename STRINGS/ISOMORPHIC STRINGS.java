@@ -1,37 +1,30 @@
- if (str1.length() != str2.length()) {
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        HashMap<Character, Character> hashMap1 = new HashMap<>();
+        HashMap<Character, Character> hashMap2 = new HashMap<>();
+
+        if(s.length() != t.length())
             return false;
+
+        int len = s.length();
+
+        for(int i=0; i<len; i++){
+            Character x = s.charAt(i);
+            Character y = t.charAt(i);
+            Character first = hashMap1.get(x);
+            Character second = hashMap2.get(y);
+
+           if(first == null && second == null){//mapping do not exist till now, so put it and continue.
+                hashMap1.put(x, y);//akso if one is null and second isnt null, then it will go below and also it means there is some gadbad.
+                hashMap2.put(y, x);
+                continue;
+           }
+
+            if(first!=y || second!=x)
+                return false;
         }
-        
-        // Create two hash maps to store mappings from str1 to str2 and vice versa
-        HashMap<Character, Character> map1 = new HashMap<>();
-        HashMap<Character, Character> map2 = new HashMap<>();
-        
-        for (int i = 0; i < str1.length(); i++) {
-            char char1 = str1.charAt(i);
-            char char2 = str2.charAt(i);
-            
-            // Check if there is an existing mapping in map1
-            if (map1.containsKey(char1)) {
-                // If the current mapping does not match char2, return false
-                if (map1.get(char1) != char2) {
-                    return false;
-                }
-            } else {
-                // If no mapping exists, create a new mapping
-                map1.put(char1, char2);
-            }
-            
-            // Check if there is an existing mapping in map2
-            if (map2.containsKey(char2)) {
-                // If the current mapping does not match char1, return false
-                if (map2.get(char2) != char1) {
-                    return false;
-                }
-            } else {
-                // If no mapping exists, create a new mapping
-                map2.put(char2, char1);
-            }
-        }
-        
-        // If all characters are consistently mapped, the strings are isomorphic
+
         return true;
+
+    }
+}

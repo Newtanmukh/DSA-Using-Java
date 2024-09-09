@@ -1,0 +1,27 @@
+class Solution {
+    public String reverseWords(String s) {
+        int size = s.length();
+
+        String res = "";
+
+        StringBuilder finalAnswer = new StringBuilder();
+
+        for(int i=size-1; i>=0; i--){
+            Character c = s.charAt(i);
+
+            if(c==' '){
+                finalAnswer.append(new StringBuilder().append(res).reverse().toString());
+                if(res!=""){
+                    finalAnswer.append(' ');
+                }
+                res = "";
+            }else{
+                res = res + c;
+            }
+        }
+
+        finalAnswer.append(new StringBuilder().append(res).reverse().toString());
+
+        return finalAnswer.toString().trim();
+    }
+}

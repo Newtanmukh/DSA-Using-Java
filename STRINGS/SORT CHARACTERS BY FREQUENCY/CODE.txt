@@ -1,0 +1,50 @@
+class Solution {
+
+    class Pair{
+        Character c;
+        int val;
+        Pair(Character c, int val){
+            this.c = c;
+            this.val = val;
+        }
+    }
+
+    public String frequencySort(String s) {
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        for(int i=0; i<s.length(); i++){
+            Character c = s.charAt(i);
+            hashMap.put(c, hashMap.getOrDefault(c, 0) + 1);
+        }    
+
+        List<Pair> list = new ArrayList<>();
+
+        for(Map.Entry<Character, Integer> key: hashMap.entrySet()){
+            Character c = key.getKey();
+            Integer val = key.getValue();
+            list.add(new Pair(c, val));
+        }
+
+        Collections.sort(list, new Comparator<Pair>(){
+
+            @Override
+            public int compare(Pair lhs, Pair rhs){
+                return (-1)*Integer.compare(lhs.val, rhs.val);
+            }
+            
+        });
+
+        	StringBuilder sb = new StringBuilder();
+
+            for(Pair pair: list){
+                Character c = pair.c;
+                int val = pair.val;
+
+                while(val>0){
+                    sb.append(c);
+                    val--;
+                }
+            }
+
+            return sb.toString();
+    }
+}

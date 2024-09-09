@@ -1,0 +1,26 @@
+class Solution {
+    public String largestOddNumber(String num) {
+        int size = num.length();
+
+        String res = "";
+        int index = -1;
+        for(int i = size - 1; i>=0; i--){
+            Character c = num.charAt(i);
+            if(isOdd(c)){
+                index = i;
+                break;
+            }
+        }
+
+        if(index==-1)
+            return res;
+        
+        return num.substring(0, index + 1);
+    }
+
+    public boolean isOdd(Character c){
+        if(c=='1' || c=='3' || c=='5' || c=='7' || c=='9')
+            return true;
+        return false;
+    }
+}

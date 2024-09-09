@@ -1,0 +1,30 @@
+class Solution {
+    public String longestCommonPrefix(String[] arr) {
+        // Arrays.sort(arr);
+
+        int mini = arr[0].length();
+        String smallestString = arr[0];
+        for(String res: arr){
+            if(mini > res.length()){
+                mini = res.length();
+                smallestString = res;
+            }
+        }
+
+       
+
+        for(String s: arr){
+            int commonLength = smallestString.length();
+            for(int i=0; i<commonLength; i++){
+                if(s.charAt(i)!=smallestString.charAt(i)){
+                    smallestString = smallestString.substring(0, i);
+                    break;
+                }
+            }
+        }
+
+        return smallestString;
+
+
+    }
+}
