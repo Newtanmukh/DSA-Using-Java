@@ -1,0 +1,31 @@
+class Solution {
+    // Function to calculate the span of stockâ€™s price for all n days.
+    public static int[] calculateSpan(int price[], int n) {
+       
+       //NOTE : This is basically, giving count of all smaller elements to the left till we encounter an element greater than this.
+       //       So this problem has been reduced to,
+       
+        int[] dp = new int[n];
+        Arrays.fill(dp , 1);
+        
+        Stack<Integer> stack = new Stack<>();
+        
+        for(int i=0; i<n; i++){
+            while(stack.size() > 0 && price[stack.peek()] <= price[i])
+                stack.pop();
+                
+            if(stack.size() > 0){
+                dp[i] = i - stack.peek();
+            }else{
+                dp[i] = i + 1;
+            }
+            
+            stack.push(i);
+        }
+        
+        System.out.println(stack);
+        
+        return dp;
+        
+    }
+}

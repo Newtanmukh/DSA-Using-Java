@@ -1,0 +1,47 @@
+class Solution {
+
+    HashMap<Integer, String> hashMap;
+    List<String> list;
+
+    void dfs(String ans, String digit, int index){
+        if(index==digit.length()){
+            list.add(ans);
+            return;
+        }
+
+        Integer c = digit.charAt(index) - '0';
+        if(c==1){
+            dfs(ans, digit, index + 1);
+            return;
+        }
+        String values = hashMap.get(c);
+
+        for(Character character: values.toCharArray()){
+            dfs(ans + character, digit, index + 1);
+        }
+
+    }
+
+    public List<String> letterCombinations(String digits) {
+        this.hashMap = new HashMap<>();
+        hashMap.put(2, "abc");
+        hashMap.put(3, "def");
+        hashMap.put(4, "ghi");
+        hashMap.put(5, "jkl");
+        hashMap.put(6, "mno"); 
+        hashMap.put(7, "pqrs");
+        hashMap.put(8, "tuv");
+        hashMap.put(9, "wxyz");
+
+        this.list = new ArrayList<>();
+        String res = "";
+
+        if(digits.length() == 0) {
+            return list;
+        }
+
+        dfs(res, digits, 0);
+
+        return list;
+    }
+}

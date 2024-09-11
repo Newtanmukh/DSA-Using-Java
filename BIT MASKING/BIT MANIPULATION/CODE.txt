@@ -1,0 +1,18 @@
+class Solution {
+    static void bitManipulation(int num, int i) {
+        
+        
+      
+        //just remember for getting the odd or even no we do n&1
+        
+        //Set ith bit to 0 :  pt = pt & ~(1 << i);
+        
+        long x = (num >> (i-1)) & 1 ;
+        
+        long a = num | (1 << (i - 1));
+        
+        long b = num & (~(1 << (i-1)));
+       
+        System.out.print(x + " " + a + " " + b);
+    }
+}

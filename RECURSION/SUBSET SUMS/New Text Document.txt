@@ -1,0 +1,33 @@
+// https://www.geeksforgeeks.org/problems/subset-sums2234/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=subset-sums
+
+
+class Solution {
+    
+    ArrayList<Integer> list;
+    public void dfs(int sum, int index, int[] nums){
+        
+        if(index == nums.length){
+            list.add(sum);
+            return;
+        }
+        
+        dfs(sum + nums[index], index + 1, nums);
+        dfs(sum, index + 1, nums);
+        
+    }
+    
+    ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int n) {
+        int[] nums = new int[arr.size()];
+        int size = arr.size();
+        
+        for(int i=0;i <size; i++){
+            nums[i] = arr.get(i);
+        }
+        
+        list = new ArrayList<>();
+        
+        dfs(0, 0, nums);
+        
+        return list;
+    }
+}

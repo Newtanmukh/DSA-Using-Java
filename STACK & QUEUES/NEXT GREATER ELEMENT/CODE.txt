@@ -1,0 +1,27 @@
+class Solution
+{
+    //Function to find the next greater element for each element of the array.
+    public static long[] nextLargerElement(long[] nums, int n)
+    { 
+         long[] dp = new long[nums.length];
+
+        ArrayDeque<Long> deque = new ArrayDeque<>();
+
+        Arrays.fill(dp, -1L);
+
+        for(int i=nums.length - 1; i>=0; i--){
+            while(deque.size() > 0 &&   (long) nums[i]>=deque.getFirst()){
+                deque.removeFirst();
+            }
+            
+            if(deque.size()>0){
+                dp[i] = deque.getFirst();
+            }
+            
+            deque.addFirst((long)nums[i]);
+        }
+        
+        return dp;
+
+    } 
+}

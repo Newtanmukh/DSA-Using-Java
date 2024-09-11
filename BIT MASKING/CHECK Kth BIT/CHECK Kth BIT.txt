@@ -1,0 +1,8 @@
+class CheckBit {
+    // Function to check if Kth bit is set or not.
+    static boolean checkKthBit(int n, int k) {
+        int x = (n & (1 << k ));
+        
+        return x==0?false:true;
+    }
+}

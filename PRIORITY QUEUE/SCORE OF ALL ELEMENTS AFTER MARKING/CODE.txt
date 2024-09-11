@@ -1,0 +1,60 @@
+class Solution {
+
+    class Pair{
+        int val;
+        int index;
+
+        Pair(int val, int index){
+            this.val = val;
+            this.index = index;
+        }
+    }
+
+    public long findScore(int[] nums) {
+        List<Pair> list = new ArrayList<>();
+
+        for(int i=0; i<nums.length; i++){
+            list.add(new Pair(nums[i], i));
+        }    
+
+        PriorityQueue<Pair> minHeap = new PriorityQueue<Pair>(new Comparator<Pair>(){
+            @Override
+            public int compare(Pair lhs, Pair rhs){
+
+                int comp = Integer.compare(lhs.val, rhs.val);
+                if(comp == 0){
+                    return lhs.index - rhs.index;
+                }
+
+                return comp;
+            }
+    });
+
+        for(int i=0; i<list.size(); i++){
+            minHeap.add(list.get(i));
+        }
+
+        boolean[] visited = new boolean[nums.length];
+        Arrays.fill(visited, false);
+        long score = 0;
+        while(minHeap.size() > 0){
+            Pair poll = minHeap.poll();
+            if(visited[poll.index]==true){
+                continue;
+            }
+
+            visited[poll.index] = true;
+            int index = poll.index;
+            score = score + (long)poll.val;
+            if(index - 1 >= 0){
+                visited[index - 1] = true;
+            }
+
+            if(index + 1 <=nums.length - 1){
+                visited[index + 1] = true;
+            }
+        }
+
+        return score;
+    }
+}

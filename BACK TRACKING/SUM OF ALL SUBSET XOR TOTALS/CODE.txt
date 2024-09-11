@@ -1,0 +1,24 @@
+class Solution {
+
+    int n;
+    int sum;
+
+    public void dfs(int[] nums, int xorTillNow, int index){
+        if(index==n){
+            this.sum += xorTillNow;
+            return;
+        }
+
+        dfs(nums, xorTillNow^nums[index], index + 1);
+        dfs(nums, xorTillNow, index + 1);
+    }
+
+    public int subsetXORSum(int[] nums) {
+        this.n = nums.length;
+        this.sum = 0;
+
+        dfs(nums, 0, 0);
+
+        return this.sum;
+    }
+}

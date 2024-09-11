@@ -1,0 +1,28 @@
+class Solution{
+    
+    int requiredSum;
+    int count;
+    
+    int mod = (int)1e9 + 7;
+    public int dfs(int arr[], int sum, int index){
+        if(index==0 && sum == 0){//this means that we have concluded all the subsets then only we arrived to this soln.
+            return 1;
+        }
+        
+        if(index==0){
+            return 0;
+        }
+        
+        if(arr[index - 1] > sum){
+            return (dfs(arr, sum, index-1) % mod);
+        }
+        
+        return (dfs(arr, sum - arr[index - 1], index - 1) % mod
+                    + dfs(arr, sum, index - 1)%mod)%mod;
+    }
+    
+	public int perfectSum(int arr[],int n, int sum) 
+	{ 
+	    return dfs(arr, sum, n)%mod;
+	} 
+}

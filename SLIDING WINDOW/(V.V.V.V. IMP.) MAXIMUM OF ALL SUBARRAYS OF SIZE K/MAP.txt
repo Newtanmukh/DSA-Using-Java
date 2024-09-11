@@ -1,0 +1,54 @@
+class Solution
+{
+    static ArrayList <Integer> max_of_subarrays(int arr[], int n, int k)
+    {
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        TreeMap<Integer, Integer> hashMap = new TreeMap<>();
+        
+        int elemTillNow = 0;
+        
+        for(int i=0; i<n; i++){
+            
+            
+            int curr = arr[i];
+            hashMap.put(curr, hashMap.getOrDefault(curr, 0) + 1);
+            
+            // elemTillNow++;
+            
+            if(i >= k-1){
+                int goneIndex = i - k;
+                
+                if(goneIndex>=0){
+                    hashMap.put(arr[goneIndex], hashMap.getOrDefault(arr[goneIndex], 0) - 1);
+                
+                    if(hashMap.get(arr[goneIndex])==0){
+                        hashMap.remove(arr[goneIndex]);
+                    }
+                }
+                
+                
+                
+                ans.add(getMax(hashMap));
+            }
+        }
+        
+        return ans;
+    }
+    
+    public static Integer getMax(TreeMap<Integer, Integer> hashMap){
+        int count = 1;
+        int size = hashMap.size();
+        
+        for(Map.Entry<Integer, Integer> entry: hashMap.entrySet()){
+            int key = entry.getKey();
+            int val = entry.getValue();
+            if(count==size){
+                return key;
+            }
+            
+            count++;
+        }
+        return null;
+    }
+}

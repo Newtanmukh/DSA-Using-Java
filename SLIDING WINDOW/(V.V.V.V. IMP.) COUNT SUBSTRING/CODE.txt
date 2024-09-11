@@ -1,0 +1,48 @@
+class Solution {
+    
+    public int subStringsWithAtMostKDistinctCharacters(String s, int k){
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        
+        int j = 0;
+        int i = 0;
+        
+        int len = s.length();
+        int total = 0;
+        
+        while(j < len){
+            Character first = s.charAt(j);
+            hashMap.put(first, hashMap.getOrDefault(first, 0) + 1);
+            
+            while(hashMap.size()>k){
+                Character x = s.charAt(i);
+                hashMap.put(x, hashMap.get(x) - 1);
+                
+                if(hashMap.get(x)==0){
+                    hashMap.remove(x);
+                }
+                
+                i++;
+            }
+            
+            total = total + (j - i + 1);
+            j++;
+        }
+        
+        return total;
+    }
+    
+    
+    public int countSubstring(String s) {
+        int len = s.length();
+        int total = len * (len + 1);
+        total = total/2;
+        
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        
+        int ans = subStringsWithAtMostKDistinctCharacters(s, 2);
+        
+        return total - ans;
+        
+    }
+}
+        

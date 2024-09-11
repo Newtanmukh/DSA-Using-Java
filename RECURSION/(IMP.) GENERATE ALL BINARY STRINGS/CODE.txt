@@ -1,0 +1,31 @@
+class Solution {
+
+    List<String> list;
+    int len;
+    
+    public void dfs(String s, Character previousCharacter){
+        
+        if(s.length()==len){
+            list.add(s);
+            return;
+        }
+        
+        if(previousCharacter=='1'){
+            dfs(s + '0', '0');
+        }else{
+            dfs(s + '0', '0');
+            dfs(s + '1', '1');
+        }
+        
+    }
+    
+  public List<String> generateBinaryStrings(int n) {
+    // code here
+    this.len = n;
+    list = new ArrayList<>();
+    dfs("", '0');
+    
+    return list;
+  }
+}
+     

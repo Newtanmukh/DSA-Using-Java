@@ -1,0 +1,25 @@
+class Solution {
+
+    int max;
+    long mod = (long)(1e9 + 7);
+
+    long binaryExpontiation(long x, long n){
+        if(n==0l)
+            return 1;
+
+        long temp = binaryExpontiation(x, n/2);
+
+        if(n%2==0l){
+            return ((temp % mod) * (temp % mod))% mod;
+        }else{
+            return ((x%mod)*((temp % mod) * (temp % mod))%mod);
+        }
+    }
+
+    public int countGoodNumbers(long n) {
+        long countOf4 = n/2;
+        long countOf5 = n - countOf4;
+
+        return (int)(((binaryExpontiation(4l, countOf4)%mod) * (binaryExpontiation(5l, countOf5)%mod) ) % mod);
+    }
+}

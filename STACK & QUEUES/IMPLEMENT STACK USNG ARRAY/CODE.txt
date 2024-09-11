@@ -1,0 +1,31 @@
+
+class MyStack {
+    private int[] arr;
+    private int top;
+
+    public MyStack() {
+        arr = new int[100000];
+        top = 0;
+        
+        Arrays.fill(arr, -1);
+    }
+
+    public void push(int x) {
+        arr[top] = x;
+        top++;
+    }
+
+    public int pop() {
+        
+        if(top==0)//basically top is the pointer to the next element to be added/
+            return -1;
+        
+        top--;
+        
+        int ret = arr[top];
+        arr[top] = -1;
+        // top++;
+        
+        return ret;
+    }
+}

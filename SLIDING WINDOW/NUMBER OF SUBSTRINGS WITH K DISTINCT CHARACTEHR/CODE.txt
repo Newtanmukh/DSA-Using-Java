@@ -18,7 +18,7 @@ class Solution
                     hashMap.remove(first);
                 }
                 i++;
-            }
+            }//getting the length of longest substring with length k.
             ans = ans + (j - i + 1);
             j++;
         }

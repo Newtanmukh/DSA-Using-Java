@@ -1,0 +1,54 @@
+class Solution {
+    
+    List<String> list;
+    int n;
+    String str;
+
+    public void dfs(String s, int index){
+        
+        if(index==this.n){
+            list.add(s);
+            return;
+        }
+
+        Character c = transform(str.charAt(index));
+        if(isAlphaBet(c)){
+            dfs(s + c, index + 1); //IMPORTANT : here everytime we do s+c, we are creating a new object, so any changes made to that object will not affect this. strings are immutable, it creates new object.
+            dfs(s + transform(c), index + 1);
+        }else{
+            dfs(s + c, index + 1);
+        }
+
+    }
+
+    public List<String> letterCasePermutation(String s) {
+        list = new ArrayList<>();
+        this.n = s.length();
+        this.str = s;
+
+        dfs("", 0);
+
+        return list;
+    }
+
+    public boolean isAlphaBet(Character c){
+         if(c>='a' && c<='z')
+            return true;
+
+         if(c>='A' && c<='Z')
+            return true;
+
+            return false;
+    }
+
+    public Character transform(Character c){
+        if(c>='a' && c<='z')
+            return (char)(c + ('A' - 'a'));
+
+        if(c>='A' && c<='Z')
+            return (char)(c + ('a' - 'A'));
+        
+        return c;
+    }
+
+}

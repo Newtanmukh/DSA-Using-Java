@@ -1,0 +1,33 @@
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        ArrayDeque<Integer> deque = new ArrayDeque<Integer>();
+
+        ArrayList<Integer> ans = new ArrayList<>();
+        int n = nums.length;
+        
+        int[] dp = new int[n-k+1];
+
+        for(int i=0; i<n; i++){
+
+            while(deque.size() > 0 && deque.peekFirst() < i-k+1){//because the last index we wanna consider is i-k+1
+                deque.removeFirst();
+            }
+            while(deque.size() > 0 && nums[deque.peekLast()] <=nums[i]){
+                deque.removeLast();
+            }
+
+            if(i>=k-1){
+                if(deque.size() == 0){
+                    // ans.add(i);
+                    dp[i-k+1] = nums[i];
+                }else{
+                    // ans.add(deque.peekLast());
+                    dp[i-k+1] = nums[deque.peekFirst()];
+                }
+            }
+            deque.addLast(i);
+        }
+
+        return dp;
+    }
+}

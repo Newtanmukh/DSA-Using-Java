@@ -1,0 +1,31 @@
+class Solution {
+
+    HashSet<List<Integer>> hashSet;
+
+    public void dfs(int[] nums, int index, List<Integer> ans){
+        if(index==nums.length){
+            hashSet.add(new ArrayList<>(ans));
+            return;
+        }
+
+        ans.add(nums[index]);
+        dfs(nums, index+1, ans);
+        ans.remove(ans.size()-1);
+        dfs(nums, index+1, ans);
+    }
+
+    public List<List<Integer>> subsets(int[] nums) {
+
+        Arrays.sort(nums);
+        hashSet = new HashSet<>();
+
+        List<Integer> res = new ArrayList<>();
+        dfs(nums, 0, res);
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        hashSet.forEach(elm -> ans.add(elm));
+
+        return ans;
+    }
+}
