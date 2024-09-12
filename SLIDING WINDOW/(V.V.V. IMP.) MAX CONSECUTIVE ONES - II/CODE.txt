@@ -1,0 +1,36 @@
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        //just like the maxLength of subarray containing k distinct characters.
+
+        int right = 0;
+        int left = 0;
+        int n = nums.length;
+        int numZeroes = 0;
+
+        int ans = 0;
+
+        /*
+        The condition is always like this. while loop condition will be , j<n
+        Inside, while the condition is not true, keep decrementing the length.
+        */
+
+        while(right < n){
+            if(nums[right]==0){
+                numZeroes++;
+            }
+
+            while(numZeroes > k){
+                if(nums[left]==0){
+                    numZeroes--;
+                }
+                left++;
+            }
+
+            //now it will contain atmost k zeroes in the subArray
+            ans = Math.max(ans, right - left + 1);
+            right++;
+        }
+
+        return ans;
+    }
+}

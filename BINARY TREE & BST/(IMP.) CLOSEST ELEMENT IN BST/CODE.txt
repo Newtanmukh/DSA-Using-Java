@@ -1,0 +1,24 @@
+
+class Solution
+{
+    //Function to find the least absolute difference between any node
+    //value of the BST and the given integer.
+    int minDiff(Node  root, int k) 
+    { 
+        int ans = Integer.MAX_VALUE;
+        
+        while(root!=null){
+            int diff = Math.abs(k - root.data);
+            ans = Math.min(diff, ans);
+            
+            if(root.data>=k){
+                root = root.left;
+            }else{
+                root = root.right;
+            }
+        }
+        
+        return ans;
+    } 
+}
+

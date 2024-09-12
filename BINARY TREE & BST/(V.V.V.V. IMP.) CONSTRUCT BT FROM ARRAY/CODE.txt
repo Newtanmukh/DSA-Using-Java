@@ -1,0 +1,26 @@
+class Solution{
+    
+    int n ;
+    ArrayList<Integer> arr;
+    
+    public Node retNode(int i){
+        if(i>=n)
+            return null;
+        
+        Node newNode = new Node(arr.get(i));
+        
+        newNode.left = retNode(2*i + 1);
+        newNode.right = retNode(2*i + 2);
+            
+        return newNode;
+    }
+    
+    public void createTree(Node root, ArrayList<Integer> arr ){
+        this.n = arr.size();
+        this.arr = arr;
+        
+        root.left = retNode(1);
+        root.right = retNode(2);
+    }
+    
+}

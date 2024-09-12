@@ -1,0 +1,31 @@
+
+class Tree {
+    // Function to return the ceil of given number in BST.
+    int val = -1;
+    boolean flag = false;
+    
+    public void inorder(Node root, int key){
+        if(root==null)
+            return;
+            
+        inorder(root.left, key);
+        if(root.data >= key && this.flag==false){
+            this.val = root.data;
+            this.flag = true;
+        }
+        inorder(root.right, key);
+    }
+    
+    int findCeil(Node root, int key) {
+        this.val = -1;
+        if (root == null) 
+            return val;
+        
+        this.flag = false;
+        
+        inorder(root, key);
+        
+        return this.val;
+        
+    }
+}

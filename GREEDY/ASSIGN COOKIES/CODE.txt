@@ -1,0 +1,20 @@
+class Solution {
+    public int findContentChildren(int[] greed, int[] cookie) {
+        //logic is that we will start from the largest cookie and try to give it to the child
+        //with the most demand. if not, we will keep decrementing the until we find a child with lesser greed.
+
+        Arrays.sort(greed);
+        Arrays.sort(cookie);
+        int count = 0;
+        
+
+        for(int i=greed.length - 1,  j = cookie.length - 1; i>=0 && j>=0; i--){
+            if(cookie[j] >= greed[i]){
+                count++;
+                j--;
+            }
+        }
+
+        return count;
+    }
+}

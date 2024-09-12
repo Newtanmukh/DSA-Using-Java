@@ -1,0 +1,35 @@
+
+class Solution {
+
+    static int findPlatform(int arr[], int dep[]) {
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        
+        int platForms = 1;
+        int i = 1;
+        int j = 0;
+        
+        int n = arr.length;
+        int m = dep.length;
+        
+        int maxPlatForms = platForms;
+        
+        while(i<n && j<m){
+            
+            if(arr[i] <= dep[j]){//less than equal to because, in one platform we cannot have arrival and departure
+                                 //meaning that if one train is leaving and at the same time another train is arriving, still we need additional platform
+                platForms++;
+                i++;//for first train we check it aint possible, we will then check the second train.
+            }else{
+                platForms--;
+                j++;//means more train are leaving before another train can arrive. !
+            }
+            
+            maxPlatForms = Math.max(platForms, maxPlatForms);
+        }
+        
+        return maxPlatForms;
+        
+        
+    }
+}

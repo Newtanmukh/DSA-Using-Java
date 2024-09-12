@@ -1,0 +1,26 @@
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int i = 0;
+        int j = 0;
+        int n = nums.length;
+        int sum = 0;
+        int len = Integer.MAX_VALUE;
+        
+	//logic is that, until the condition is valid, keep decrementing and keep updating your answer.
+	//had it been the maximum sum, then the while loop would have been true until the condition is invalid. once it breaks out, then if the conidition is true, update your answer.
+
+        while(j < n){
+            sum = sum + nums[j];
+
+            while(sum >= target){
+                len = Math.min(j - i + 1, len);
+                sum = sum - nums[i];
+                i++;
+            }
+
+            j++;
+        }
+
+        return len ==Integer.MAX_VALUE?0:len ;
+    }
+}

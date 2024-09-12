@@ -1,52 +1,53 @@
 class Solution {
+
+    class Interval{
+        int start;
+        int end;
+
+        Interval(int start, int end){
+            this.start = start;
+            this.end = end;
+        }
+    }
+
     public int[][] merge(int[][] arr) {
         //why do we sort using the start Time ? 
 
-        List<List<Integer>> list = new ArrayList<>();
+        int n = arr.length;
 
-        Arrays.sort(arr, new Comparator<>(){
+        Arrays.sort(arr, new Comparator<int[]>(){
             @Override
             public int compare(int[] lhs, int[] rhs){
-                if(lhs[0] < rhs[0]){
-                    return -1;
-                }
-
-                if(lhs[0]==rhs[0]){
-                    return 0;
-                }
-
-                return 1;
-
-                // return Integer.compare(lhs[0], rhs[0]);
+                return Integer.compare(lhs[0], rhs[0]);
             }
         });
 
-        list.add(new ArrayList<>(Arrays.asList(arr[0][0], arr[0][1])));
+        ArrayList<Interval> intervals = new ArrayList<>();
 
-        for(int i=1; i<arr.length; i++){
-            int[] interval = arr[i];
-            int startTime = interval[0];
-            int endTime = interval[1];
+        intervals.add(new Interval(arr[0][0], arr[0][1]));
 
-            if(startTime <= list.get(list.size() - 1).get(1)){
-                int newStartTime = list.get(list.size()-1).get(0);
-                int newEndTime = Math.max(list.get(list.size()-1).get(1), endTime);
+        for(int i =1; i<n; i++){
+            Interval lastInterval = intervals.get(intervals.size() - 1);
+            int lastStartTime = lastInterval.start;
+            int lastEndTime = lastInterval.end;
 
-                list.set(list.size()-1,
-                                            new ArrayList<>(Arrays.asList(newStartTime, newEndTime)) 
-                                            );
+            int currentStartTime = arr[i][0];
+            int currentEndTime  = arr[i][1];
+
+            if(currentStartTime > lastEndTime ){
+                    intervals.add(new Interval(currentStartTime, currentEndTime));
             }else{
-                list.add(new ArrayList<>(Arrays.asList(startTime, endTime)));
+                    int maxEndTime = Math.max(currentEndTime, lastEndTime);
+                    intervals.set(intervals.size() - 1, new Interval(lastStartTime, maxEndTime));
             }
         }
 
-        int size = list.size();
-        int[][] dp = new int[size][2];
+        int[][] dp = new int[intervals.size()][2];
 
-        for(int i=0; i<size; i++){
-            List<Integer> x = list.get(i);
-            dp[i][0] = x.get(0);
-            dp[i][1] = x.get(1); 
+        for(int i=0; i<intervals.size(); i++){
+            Interval interval = intervals.get(i);
+            dp[i][0] = interval.start;
+            dp[i][1] = interval.end;
         }
 
         return dp;

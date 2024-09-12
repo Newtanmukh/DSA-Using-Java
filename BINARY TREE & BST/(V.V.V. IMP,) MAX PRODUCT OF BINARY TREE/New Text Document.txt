@@ -1,0 +1,36 @@
+
+class Solution {
+
+    long maxProduct;
+    long totalSum;
+    long mod = (long)(1e9 + 7);
+
+    public long returnSubTreeSum(TreeNode root){
+        if(root==null){
+            return 0L;
+        }
+
+        long left = returnSubTreeSum(root.left);
+        long right = returnSubTreeSum(root.right);
+
+        long subTreeSum = root.val + left + right;
+
+        maxProduct = Math.max(maxProduct, subTreeSum * (totalSum - subTreeSum));
+
+        return subTreeSum;
+    }
+
+    public int maxProduct(TreeNode root) {
+        this.maxProduct = Long.MIN_VALUE;
+      
+
+
+        this.totalSum = returnSubTreeSum(root);
+        returnSubTreeSum(root);
+
+        this.maxProduct = Math.max(this.maxProduct, 0L);
+
+        return (int)(this.maxProduct %mod);
+        //initially i was doing (int)(this.maxProduct) % mod, which was wrong since we need to do the mod first then compute rht answer.
+    }
+}

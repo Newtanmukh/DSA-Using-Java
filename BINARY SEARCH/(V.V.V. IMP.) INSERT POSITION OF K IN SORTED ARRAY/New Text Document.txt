@@ -1,0 +1,22 @@
+
+class Solution
+{
+    static int searchInsertK(int arr[], int n, int k)
+    {
+        int low = 0;
+        int high = n - 1;
+        int index = -1;
+        
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            if(arr[mid] >= k){
+                index = mid;
+                high = mid - 1;
+            }else{
+                low = mid + 1;
+            }
+        }
+        
+        return index==-1? n : index;//index will be -1 incase this element to be inserted is bigger than all the elements in the array. 
+    }
+}

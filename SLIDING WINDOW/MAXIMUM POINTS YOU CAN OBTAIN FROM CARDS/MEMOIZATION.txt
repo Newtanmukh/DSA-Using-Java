@@ -1,0 +1,22 @@
+class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        int n = cardPoints.length;
+        int[][][] dp = new int[k + 1][n][n];    
+        for(int[][] grid : dp)
+            for(int[] row : grid)
+                Arrays.fill(row, -1);
+        
+        return solve(cardPoints, k, 0, n - 1, dp);
+    }
+    
+    private int solve(int[] points, int k, int left, int right, int[][][] dp){
+        if(k == 0) return 0;
+        
+        if(dp[k][left][right] != -1) return dp[k][left][right];
+        int leftt = solve(points, k - 1, left + 1, right, dp) + points[left];
+        int rightt = solve(points, k - 1, left, right - 1, dp) + points[right];
+        
+        return dp[k][left][right] = Math.max(leftt, rightt);
+    }
+    
+}
