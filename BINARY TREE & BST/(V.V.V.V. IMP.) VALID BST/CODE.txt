@@ -1,0 +1,16 @@
+class Solution {
+
+    public boolean isValid(TreeNode root, int min, int max){
+        if(root==null)
+            return true;
+
+        return    isValid(root.left, min, root.val) 
+               && isValid(root.right, root.val, max) 
+               && root.val > min
+               && max > root.val; 
+    }
+
+    public boolean isValidBST(TreeNode root) {
+        return isValid(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+}

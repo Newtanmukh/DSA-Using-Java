@@ -1,0 +1,38 @@
+class Tree {
+    // Function to delete a node from BST.
+      public static Node deleteNode(Node root, int X) {
+        if(root==null)
+            return root;
+            
+        if(root.data > X){
+            root.left = deleteNode(root.left, X);//search in left subTree
+        }else if(root.data < X){
+            root.right = deleteNode(root.right, X);//search in right subTree
+        }else{//means this node is the node !
+            
+            if(root.left==null)//left subTree is null then return the right subTree.
+                return root.right;//right subTree is null then return the left subTree.
+                
+            if(root.right==null)
+                return root.left;
+                
+            root.data = minValue(root.right);//replace this current node (which we have to delete) with the value just bigger than this one, which will be present in the right subTree
+            root.right = deleteNode(root.right, root.data);//since you put tge root.data here, we need to delete that node whose value you just put here.
+        
+            return root;
+        }
+        return root;
+      }
+
+    
+    public static int minValue(Node root) {
+        int minValue = root.data;
+        
+        while(root!=null){
+            minValue = root.data;
+            root = root.left;
+        }
+        
+        return minValue;
+    }
+}

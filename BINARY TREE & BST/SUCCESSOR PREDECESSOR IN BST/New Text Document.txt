@@ -1,0 +1,30 @@
+
+class Solution
+{
+    // returns the inorder successor of the Node x in BST (rooted at 'root')
+    
+    Node successor ;
+    Node previous;
+    public void reverseInorder(Node root, Node key){
+        if(root==null)
+            return;
+            
+        reverseInorder(root.right, key);
+        if(root==key){
+            this.successor = previous;
+            return;
+        }
+        previous = root;
+        reverseInorder(root.left, key);
+    }
+    
+	public Node inorderSuccessor(Node root,Node x)
+     {
+          this.successor = null;
+          this.previous = null;
+          
+          reverseInorder(root, x);
+          
+          return this.successor;
+     }
+}

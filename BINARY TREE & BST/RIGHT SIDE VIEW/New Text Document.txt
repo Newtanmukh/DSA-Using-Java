@@ -1,0 +1,41 @@
+
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<List<Integer>> allLevels = new ArrayList<>();
+        if(root==null)
+            return new ArrayList<>();
+
+        Deque<TreeNode> deque = new ArrayDeque<>();
+
+        deque.addLast(root);
+
+        while(deque.size() > 0){
+            int size = deque.size();
+            List<Integer> level = new ArrayList<>();
+            
+            for(int i=0; i<size; i++){
+                TreeNode front = deque.peekFirst();
+                deque.removeFirst();
+                if(front.left!=null)
+                    deque.addLast(front.left);
+
+                if(front.right!=null)
+                    deque.addLast(front.right);
+                    
+                level.add(front.val);
+            }
+
+            allLevels.add(level);
+        }
+
+        List<Integer> ans = new ArrayList<>();
+
+        for(int i=0; i<allLevels.size(); i++){
+            int size = allLevels.get(i).size();
+            ans.add(allLevels.get(i).get(size-1));
+        }
+
+        return ans;
+
+    }
+}

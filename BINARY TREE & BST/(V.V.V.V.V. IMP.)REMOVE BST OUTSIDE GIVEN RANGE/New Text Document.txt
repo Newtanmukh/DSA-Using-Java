@@ -1,0 +1,28 @@
+
+class Solution {
+    
+    Node retRemovedNode(Node root, int l, int r){
+        if(root==null)
+            return null;
+            
+        
+        
+        root.left = retRemovedNode(root.left, l, r);
+        root.right = retRemovedNode(root.right, l, r);
+        
+        int val = root.data;
+        if(val < l){
+            return root.right;
+        }else if(val > r){
+            return root.left;
+        }
+        
+        return root;
+    }
+    
+    Node removekeys(Node root, int l, int r) {
+        // code here
+        
+        return retRemovedNode(root, l, r);
+    }
+}
