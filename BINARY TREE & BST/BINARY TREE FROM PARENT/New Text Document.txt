@@ -1,0 +1,52 @@
+
+/*******************************************************
+Following is the BinaryTreeNode class structure
+
+class BinaryTreeNode<T> {
+    T data;
+    BinaryTreeNode<T> left;
+    BinaryTreeNode<T> right;
+
+    public BinaryTreeNode(T data) {
+        this.data = data;
+    }
+}
+*******************************************************/
+
+public class Solution {
+	public static BinaryTreeNode<Integer> createTree(int[] parent) {
+        HashMap<Integer, BinaryTreeNode<Integer>> parentToChildMap = new HashMap<>();
+
+        BinaryTreeNode<Integer> rootNode = null;
+
+        for(int i=0; i<parent.length; i++){
+            int parentNode = i;
+            int childNode = parent[i];
+
+            if(childNode==-1){
+                rootNode = new BinaryTreeNode(i);
+                parentToChildMap.put(i, rootNode);
+            }else{
+                BinaryTreeNode<Integer> node = new BinaryTreeNode(i);
+                ans.put(i, node);
+            }
+        }
+
+        for(int i=0;i<parent.length;i++){
+            if(parent[i]==-1){
+                continue;
+            }
+            else{
+                BinaryTreeNode<Integer> temp=ans.get(parent[i]);
+                BinaryTreeNode<Integer> nodes=ans.get(i);
+                if(temp.left==null){
+                    temp.left=nodes;
+                }else{
+                    temp.right=nodes;
+                }
+            }
+        }
+
+        return rootNode;
+    }
+}

@@ -1,0 +1,87 @@
+
+class Solution
+{
+    
+   static boolean  isCycle(int node, boolean[] visited, boolean[] stack, ArrayList<ArrayList<Integer>> adj){
+        visited[node] = true;
+        stack[node] = true;
+        
+        ArrayList<Integer> neighBours = adj.get(node);
+        
+        for(int v: neighBours){
+            if(visited[v]==false){
+                if(isCycle(v, visited, stack, adj))
+                    return true;
+            }else if(stack[v]==true){
+                return true;
+            }
+        }
+        
+        stack[node] = false;
+        return false;
+    }
+    
+    public static void topoSort(ArrayList<Integer> ans, int node, boolean[] visited, ArrayList<ArrayList<Integer>> adj){
+        visited[node] = true;
+        
+        ArrayList<Integer> neighBours = adj.get(node);
+        
+        for(int neighBour: neighBours){
+            if(visited[neighBour]==false){
+                topoSort(ans, neighBour, visited, adj);
+            }
+        }
+        
+        ans.add(node);
+    }
+    
+    static int[] findOrder(int n, int m, ArrayList<ArrayList<Integer>> prerequisites) 
+    {
+        boolean[] visited = new boolean[n];
+        boolean[] stack = new boolean[n];
+        Arrays.fill(visited, false);
+        Arrays.fill(stack, false);
+        
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        
+        for(int i=0; i<n; i++){
+            adj.add(new ArrayList<>());
+        }
+        
+        for(ArrayList<Integer> preq: prerequisites){
+            int u = preq.get(0);
+            int v = preq.get(1);
+            ArrayList<Integer> list = adj.get(v);
+            list.add(u);
+            adj.set(v, list);
+        }
+        
+        for(int i=0; i<n; i++){
+            if(visited[i]==false){
+                if(isCycle(i, visited, stack, adj)){
+                    // System.out.println("No Ordering Possible");
+                    return new int[0];
+                }
+            }
+        }
+        
+        Arrays.fill(visited, false);
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        for(int i=0; i<n; i++){
+            if(visited[i]==false){
+                topoSort(ans, i, visited, adj);
+            }
+        }
+        
+        Collections.reverse(ans);
+        
+        int[] dp = new int[ans.size()];
+        
+        for(int i=0; i<ans.size(); i++){
+            dp[i] = ans.get(i);
+        }
+        
+        return dp;
+    }
+}

@@ -1,0 +1,88 @@
+/*
+	Idea here is that, keep track of what all points were 'O', then do DFS and change every 'O' to 'X'.
+	Later, from the boundary if marked were true, turn all of them to 'O' again.
+
+
+*/
+
+class Solution {
+
+    public void dfs(int i, int j, char[][] board){
+        if(i<0 || j<0 || i>=board.length || j>=board[0].length)
+            return;
+
+        if(board[i][j]=='X')
+            return;
+
+        board[i][j] = 'X';
+
+        dfs(i+1, j, board);
+        dfs(i-1, j, board);
+        dfs(i, j-1, board);
+        dfs(i, j+1, board);
+    }
+
+    public void dfs(int i, int j, char[][] board, boolean[][] marked, boolean[][] visited){
+        if(i<0 || j<0 || i>=board.length || j>=board[0].length)
+            return;
+
+        if(marked[i][j]==false||visited[i][j]==true)
+            return;
+
+        board[i][j] = 'O';
+        visited[i][j]=true;
+
+        dfs(i+1, j, board, marked, visited);
+        dfs(i-1, j, board, marked, visited);
+        dfs(i, j+1, board, marked, visited);
+        dfs(i, j-1, board, marked, visited);
+    }
+
+    public void solve(char[][] board) {
+        int m = board.length;
+        int n = board[0].length;
+        boolean[][] marked = new boolean[m][n];
+
+        for(int i=0; i<m; i++)
+            for(int j=0; j<n; j++){
+
+                if(board[i][j]=='O'){
+                    marked[i][j] = true;
+                }else{
+                    marked[i][j] = false;
+                }
+            }
+            
+        for(int i=0; i<m; i++)
+            for(int j=0; j<n; j++){
+                if(board[i][j]=='O'){
+                    dfs(i, j, board);
+                }
+            }
+
+        boolean[][] visited = new boolean[m][n];
+        for(int i=0; i<m; i++){
+            if(marked[i][0]==true){
+                dfs(i, 0, board, marked, visited);
+            }
+
+            if(marked[i][n-1]==true){
+                dfs(i, n-1, board, marked, visited);
+            }
+        }
+
+        for(int j=0; j<n; j++){
+            if(marked[0][j]){
+                dfs(0, j, board, marked, visited);
+            }
+
+            if(marked[m-1][j]){
+                dfs(m-1, j, board, marked, visited);
+            }
+        }
+
+
+        // return board;
+        
+    }
+}

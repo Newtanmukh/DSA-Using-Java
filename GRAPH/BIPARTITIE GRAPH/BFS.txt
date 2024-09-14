@@ -1,0 +1,34 @@
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        int n = graph.length;
+        int[] colors = new int[n];	
+        Arrays.fill(colors, 0);		
+				
+        for (int i = 0; i < n; i++) {
+            if (colors[i] == 0) {
+                Deque<Integer> deque = new ArrayDeque<>();
+                deque.addLast(i);
+                colors[i] = 1;
+
+                while(deque.size() > 0){
+                    int size = deque.size();
+
+                    for(int j=0; j<size; j++){
+                        int front = deque.peekFirst();
+                        deque.removeFirst();
+
+                        for(int neighBour:graph[front]){
+                            if(colors[neighBour]==0){
+                                colors[neighBour] = -colors[front];
+                                deque.addLast(neighBour);
+                            }else if(colors[neighBour]==colors[front]){
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}

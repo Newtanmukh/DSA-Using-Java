@@ -5,7 +5,8 @@ class Tree {
             return root;
             
         if(root.data > X){
-            root.left = deleteNode(root.left, X);//search in left subTree
+            root.left = deleteNode(root.left, X);
+//search in left subTree
         }else if(root.data < X){
             root.right = deleteNode(root.right, X);//search in right subTree
         }else{//means this node is the node !

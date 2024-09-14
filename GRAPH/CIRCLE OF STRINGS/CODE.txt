@@ -1,0 +1,76 @@
+
+class Solution {
+    
+    public HashSet<Character> bfs(Character s, HashMap<Character, List<Character>> hashMap){
+        HashSet<Character> visited = new HashSet<>();
+        Deque<Character> deque = new ArrayDeque<>();
+        
+        deque.addLast(s);
+        visited.add(s);
+        
+        while(deque.size() > 0){
+            int size = deque.size();
+            
+            for(int i=0; i<size; i++){
+                Character front = deque.peekFirst();
+                deque.removeFirst();
+                 if (hashMap.get(front) != null) {
+                    for(Character neighBour: hashMap.get(front)){
+                        if(!visited.contains(neighBour)){
+                            visited.add(neighBour);
+                            deque.addLast(neighBour);
+                        }
+                }
+              }
+            }
+        }
+        
+        return visited;
+    }
+    
+    public int isCircle(String arr[]) {
+        
+        int[] inDegree = new int[26];
+        int[] outDegree = new int[26];
+        
+        Arrays.fill(inDegree, 0);
+        Arrays.fill(outDegree, 0);
+        
+        Set<Character> presentChars = new HashSet<>();
+        
+        HashMap<Character, List<Character>> adjList = new HashMap<>();
+        
+        for(String str: arr){
+            int size = str.length();
+            Character first = str.charAt(0);
+            Character last  = str.charAt(size - 1);
+            
+            inDegree[last-'a']++;
+            outDegree[first-'a']++;
+            
+            presentChars.add(first);
+            presentChars.add(last);
+            
+            
+            // adjList.put(first, adjList.getOrDefault(first, new ArrayList<Character>()).add(last));
+        
+            
+            adjList.putIfAbsent(first, new ArrayList<>()); // Use putIfAbsent instead of getOrDefault
+            adjList.get(first).add(last);  
+        }
+        
+        HashSet<Character> check  =  bfs(arr[0].charAt(0), adjList);
+        
+        if(!check.containsAll(presentChars)){
+            return 0;
+        }
+        
+        for(int i=0; i<26; i++){
+            if(inDegree[i]!=outDegree[i])
+                return 0;
+        }
+        
+        return 1;
+        
+    }
+}

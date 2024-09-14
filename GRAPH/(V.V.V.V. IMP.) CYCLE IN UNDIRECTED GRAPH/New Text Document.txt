@@ -1,0 +1,42 @@
+class Solution {
+    // Function to detect cycle in an undirected graph.
+    
+    boolean isCyclePresent;
+    
+    public void isCycle(int node, int parent, ArrayList<ArrayList<Integer>> adj, boolean[] visited){
+        
+        visited[node] = true;
+        
+        ArrayList<Integer> neighBours = adj.get(node);
+        
+        for(int neighBour: neighBours){
+            if(neighBour==parent)
+                continue;
+                
+            if(visited[neighBour]==true){
+                this.isCyclePresent = true;
+                return;
+            }
+            
+            if(visited[neighBour]==false){
+                isCycle(neighBour, node, adj, visited);
+            }
+        }
+        
+    }
+    
+    public boolean isCycle(int v, ArrayList<ArrayList<Integer>> adj) {
+         
+        this.isCyclePresent = false;
+        boolean[] visited = new boolean[v];
+        Arrays.fill(visited, false);
+         
+        for(int i=0; i<v; i++){
+            if(!visited[i]){
+                isCycle(i, -1, adj, visited);
+            }
+        }
+        
+        return this.isCyclePresent;
+    }
+}
