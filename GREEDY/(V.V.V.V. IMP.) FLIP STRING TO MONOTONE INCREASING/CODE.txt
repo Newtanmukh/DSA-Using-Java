@@ -1,0 +1,44 @@
+class Solution {
+    public int minFlipsMonoIncr(String s) {
+        
+        int firstIndexOfi = -1;
+        int numberOfOnes = 0;
+        for(int i=0; i<s.length(); i++){
+            Character c = s.charAt(i);
+            if(c=='1'){
+                if(firstIndexOfi==-1){
+                    firstIndexOfi = i;
+                }
+                numberOfOnes++;
+            }
+        }
+
+        // if(firstIndexOfi==-1)
+        //     return 0;//no ones present
+
+        // if(numberOfOnes == s.length() - firstIndexOfi)
+        //     return 0;//all are ones.
+        
+
+        int zeroesTillNow = 0;
+        int onesTillNow = 0;
+
+        int minTurns = Integer.MAX_VALUE;
+
+        for(int i=s.length()-1; i>=0; i--){
+            Character c = s.charAt(i);
+
+            if(c=='1'){
+                onesTillNow++;
+            }else{
+                zeroesTillNow++;
+            }
+
+            minTurns = Math.min(minTurns, Math.min(zeroesTillNow + (numberOfOnes-onesTillNow), //convert the last to 1.
+                                onesTillNow + (numberOfOnes - onesTillNow)));//convert the last to 0.
+        }
+
+        return minTurns;
+
+    }
+}

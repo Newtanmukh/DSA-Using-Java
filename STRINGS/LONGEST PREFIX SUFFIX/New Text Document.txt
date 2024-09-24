@@ -1,0 +1,32 @@
+
+class Solution {
+    int lps(String str) {
+        
+        int n = str.length();
+        int[] dp = new int[n];
+        Arrays.fill(dp, 0);
+        
+
+        
+        int i = 1;
+        int len = 0;
+        
+        while(i < n){
+            if(str.charAt(i)==str.charAt(len)){
+                dp[i] = len+1;
+                len++;
+                i++;
+            }else{
+                if(len > 0){
+                    len = dp[len - 1];
+                }else{
+                    dp[i] = 0;
+                    i++;
+                }
+            }
+        }
+        
+        return dp[n-1];
+        
+    }
+}

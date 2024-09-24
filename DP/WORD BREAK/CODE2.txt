@@ -1,36 +1,44 @@
-
-
 class Solution
 {
-    int flag=0;
+    static HashSet<String> hashSet;
+    static boolean  isPossible;
     
-     void  solve(int i, String s, HashMap<String,Boolean> hashMap){
+    public static int wordBreak(int n, String s, ArrayList<String> dictionary )
+    {
+        hashSet = new HashSet<>();
+        isPossible = false;
         
-        if(i==s.length()){
-            flag = 1;
+        for(int i=0; i<dictionary.size(); i++){
+            hashSet.add(dictionary.get(i));
+        }
+        
+        n = s.length();
+        
+        dfs(0, s, n);
+        
+        return isPossible ? 1 : 0;
+    }
+    
+    public static void dfs(int pos, String s, int n){
+        
+        if(pos==n){//it means that all character previous to this were consumed.
+            isPossible = true;
             return;
         }
         
+        // if(isPossible)
+        //     return;
+        
         String temp = "";
         
-        for(int j=i; j<s.length(); j++){
-            temp = temp + s.charAt(j);
-            
-            if(hashMap.get(temp) != null && hashMap.get(temp)){
-                solve(j+1, s, hashMap);    
+        for(int i=pos; i<n; i++){
+            temp = temp + s.charAt(i);
+            if(isPossible)//checking here only and quitting incase already there was a match, no need to continue !
+                return;
+            if(hashSet.contains(temp)){
+                dfs(i+1, s, n);
             }
         }
-    }
-    
-     public  int wordBreak(int n, String s, ArrayList<String> dictionary )
-    {
-        HashMap<String, Boolean> hashMap = new HashMap<>();
-        for(int i=0; i<dictionary.size(); i++){
-            hashMap.put(dictionary.get(i), true);
-        }
         
-        solve(0, s, hashMap);
-        
-        return flag;
     }
 }

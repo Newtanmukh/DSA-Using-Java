@@ -1,0 +1,34 @@
+class Solution {
+    public String countAndSay(int n) {
+        String res = "1";
+
+        if(n==1)
+            return res;
+
+        for(int i=1; i<n; i++){
+            res = transform(res);
+        }
+
+        return res;
+    }
+
+    public String transform(String res){
+        String ret = "";
+        char[] arr = res.toCharArray();
+        int n = arr.length;
+        int count = 1;
+
+        for(int i=0; i<n; i++){
+            char c = res.charAt(i);
+            while(i+1<n && res.charAt(i+1)==res.charAt(i)){
+                count++;
+                i++;
+            }
+
+            ret = ret + count + c;
+            count=1;
+        }
+
+        return ret;
+    }
+}

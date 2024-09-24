@@ -1,0 +1,33 @@
+class Solution {
+    public String largestNumber(int[] nums) {
+        
+        int size = nums.length;
+
+        String[] arr = new String[size];
+        
+        for(int i=0; i<size; i++){
+            arr[i] = String.valueOf(nums[i]);
+        }
+
+        Arrays.sort(arr, new Comparator<String>(){
+
+            @Override
+            public int compare(String lhs, String rhs){
+                String left = lhs + rhs;
+                String right = rhs + lhs;
+
+                return -left.compareTo(right);
+            }
+        });
+
+        String res = "";
+        for(String str: arr){
+            res = res + str;
+        }
+
+        if(res.charAt(0)=='0')
+            return "0";
+
+        return res;
+    }
+}

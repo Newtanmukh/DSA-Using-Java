@@ -1,0 +1,24 @@
+
+class Solution {
+    // Returns count buildings that can see sunlight
+    public int countBuildings(int[] height) {
+        
+        Stack<Integer> stack = new Stack<>();
+        
+        int count = 0;
+        
+        for(int i=0; i<height.length; i++){
+            
+            while(stack.size() > 0 && stack.peek() < height[i]){
+                stack.pop();
+            }
+            
+            if(stack.size()==0)
+                count++;
+                
+            stack.push(height[i]);
+        }
+        
+        return count;
+    }
+}

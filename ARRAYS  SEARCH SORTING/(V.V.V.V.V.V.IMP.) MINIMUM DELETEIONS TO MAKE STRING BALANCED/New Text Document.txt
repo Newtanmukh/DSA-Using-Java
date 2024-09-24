@@ -1,0 +1,36 @@
+class Solution {
+    public int minimumDeletions(String s) {
+        int minDeletions = Integer.MAX_VALUE;
+
+        int totalA = 0;
+        int totalB = 0;
+
+        char[] arr = s.toCharArray();
+
+        for(Character c: arr){
+            if(c=='a'){
+                totalA++;
+            }else if(c=='b'){
+                totalB++;
+            }
+        }
+
+        int AtillNow = 0;
+        int BtillNow = 0;
+
+        minDeletions = Math.min(minDeletions, BtillNow + (totalA - AtillNow));// even without considering the any character, just delete all the a's in the string.
+
+        for(Character c: arr){
+            if(c=='b'){
+                BtillNow++;
+            }else if(c=='a'){
+                AtillNow++;
+            }
+
+            minDeletions = Math.min(minDeletions, BtillNow + (totalA - AtillNow));
+        }
+
+        return minDeletions;
+
+    }
+}

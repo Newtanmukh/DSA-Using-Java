@@ -1,0 +1,39 @@
+
+class Solution {
+    
+   static long mod = (long)(1e9 + 7);
+   static long  recursion(String s, String t, int index1, int index2, long[][] dp){
+        
+        if(index1<0 || index2<0)
+            return 0L;
+            
+        if(dp[index1][index2]!=-1)
+            return dp[index1][index2];
+            
+         if(index2==0)
+            return dp[index1][index2] = 1L;
+            
+        if(index1==0)
+            return dp[index1][index2] = 0L;
+        
+        if(s.charAt(index1-1)==t.charAt(index2-1)){
+            return 
+            dp[index1][index2] = 
+            (recursion(s, t, index1 - 1, index2 - 1, dp) %mod)
+            + (recursion(s, t, index1-1, index2, dp)%mod);
+        }
+        
+        return dp[index1][index2] = (recursion(s, t, index1-1, index2, dp)%mod);
+        
+    }
+    
+    public static int countWays(String s, String t) {
+        
+        long[][] dp = new long[s.length()+1][t.length()+1];
+        
+        for(int i=0; i<s.length()+1; i++){
+            Arrays.fill(dp[i], -1L);
+        }
+        return (int)(recursion(s, t, s.length(), t.length(), dp) % mod);
+    }
+}
