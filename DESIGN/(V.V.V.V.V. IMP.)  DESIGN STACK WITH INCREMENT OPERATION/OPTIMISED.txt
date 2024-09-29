@@ -1,0 +1,49 @@
+class CustomStack {
+
+    int front;
+    int[] stack;
+    int[] added;
+
+
+    public CustomStack(int k) {
+        stack = new int[k];
+        added = new int[k];
+        front = -1;
+    }
+    
+    public void push(int x) {
+        if(front == stack.length - 1)
+            return;
+        
+        front++;
+        stack[front] = x;
+    }
+    
+    public int pop() {
+        if(front==-1)
+            return -1;
+
+        int addVal = added[front];
+        if(front > 0){
+            added[front-1] += added[front];
+        }
+        int val = stack[front];
+        added[front] = 0;
+	
+			
+	//we are popping this element, so dont need it anymore
+
+        front--;
+
+        return val + addVal;
+    }
+    
+    public void increment(int k, int val) {
+        int index = Math.min(k-1, front);
+        if(index < 0)
+            return;
+
+        added[index] += val;
+
+    }
+}

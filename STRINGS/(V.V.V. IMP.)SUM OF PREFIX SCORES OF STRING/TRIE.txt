@@ -1,0 +1,47 @@
+class Solution {
+
+    char FIRST_CHAR = 'a';
+    class Trie{
+        Trie[] ch;
+        int visited;
+
+        Trie(){
+            this.ch = new Trie[26];
+            this.visited = 0;
+        }
+    }
+
+    public int[] sumPrefixScores(String[] words) {
+        Trie rootNode = new Trie();
+        int[] ans = new int[words.length];
+        Arrays.fill(ans, 0);
+
+        for(String word: words){
+            Trie t = rootNode;
+            for(char c: word.toCharArray()){
+                int x = c - FIRST_CHAR;
+                if(t.ch[x]==null)
+                    t.ch[x] = new Trie();
+
+                t.ch[x].visited++;
+                t = t.ch[x];
+            }
+        }
+        
+        int i = 0;
+
+        for(String word: words){
+            int totalVisited = 0;
+            Trie t = rootNode;
+            for(char c: word.toCharArray()){
+                int x = c - FIRST_CHAR;
+                totalVisited = totalVisited + t.ch[x].visited;
+                t = t.ch[x];
+            }
+            ans[i] = totalVisited;
+            i++;
+        }
+
+        return ans;
+    }
+}

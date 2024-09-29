@@ -1,0 +1,2 @@
+In These types of questions, what we do is, if we have to add an element let us say, then we first increment the index and then assign
+the new value in that index.

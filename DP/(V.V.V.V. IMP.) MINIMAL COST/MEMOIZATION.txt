@@ -1,0 +1,26 @@
+class Solution {
+    int k;
+    int memoization(int index, int[] arr, int[] dp,int n){
+        if(index==n-1)//we are at the final destination now;
+            return 0;
+            
+        if(dp[index]!=-1)
+            return dp[index];
+            
+        int minCost = Integer.MAX_VALUE;
+        
+        for(int j=index+1; j<n && j -index <=k; j++){
+            int cost = Math.abs(arr[j] - arr[index]) + memoization(j, arr, dp, n);
+            minCost = Math.min(minCost, cost);    
+        }
+        
+        return dp[index] = minCost;
+    }
+    
+    public int minimizeCost(int k, int arr[]) {
+        int[] dp = new int[arr.length];
+        Arrays.fill(dp, -1);
+        this.k = k;
+        return memoization(0, arr, dp, arr.length);
+    }
+}

@@ -1,0 +1,42 @@
+class Solution {
+
+    int maxi;
+    public int longestCommonPrefix(int[] arr1, int[] arr2) {
+        maxi = 0;
+        HashMap<Integer, Boolean> hashMap = new HashMap<>();
+        for(int num: arr1){
+            insertPrefix(hashMap, num);
+        }
+
+        for(int num: arr2){
+            calculateLongestPrefix(hashMap, num);
+        }
+
+        return getDigits();
+    }
+
+    public int getDigits(){
+        int count = 0;
+        while(maxi>0){
+            count++;
+            maxi = maxi/10;
+        }
+        return count;
+    }
+
+    public void calculateLongestPrefix(HashMap<Integer, Boolean> hashMap, int num){
+        while(num > 0){
+            if(hashMap.getOrDefault(num, false)){
+                maxi = Math.max(maxi, num);
+            }
+            num = num/10;
+        }
+    }
+
+    public void insertPrefix(HashMap<Integer, Boolean> hashMap, int num){
+        while(num>0){
+            hashMap.put(num, true);
+            num = num/10;
+        }
+    }
+}

@@ -1,0 +1,50 @@
+/*
+	basically we have an array, and we will receive some queries where let us say,
+	the bottom k indexes will be incremented by value 'val'.
+	also we will support get and set functions.
+	SO WE WILL maintain a diff array.
+*/
+
+
+
+
+
+
+
+
+
+
+
+class EfficientArray {
+    int[] arr;
+    int[] increment;
+    int size;
+
+    public EfficientArray(int size) {
+        this.size = size;
+        arr = new int[size];
+        increment = new int[size + 1]; 
+    }
+
+    
+    public void increment(int k, int val) {
+        increment[0] += val; // Increment starts from index 0
+        if (k < size) {
+            increment[k] -= val; 
+        }
+    }
+
+    public int get(int i) {
+        int cumIncrement = 0;
+
+        for (int j = 0; j <= i; j++) {
+            cumIncrement += increment[j];
+        }
+        
+        return arr[i] + cumIncrement;
+    }
+
+    public void set(int i, int value) {
+        arr[i] = value;
+    }
+}

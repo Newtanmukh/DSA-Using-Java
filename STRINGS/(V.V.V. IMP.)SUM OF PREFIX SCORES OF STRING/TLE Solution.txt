@@ -1,0 +1,28 @@
+class Solution {
+    public int[] sumPrefixScores(String[] words) {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        
+        int n = words.length;
+        for(int i=0; i<n; i++){
+            char[] arr = words[i].toCharArray();
+            String temp = "";
+            for(char c: arr){
+                temp = temp + c;
+                hashMap.put(temp, hashMap.getOrDefault(temp , 0) + 1);
+            }
+        }
+
+        int[] dp = new int[n];
+
+        for(int i=0; i<n; i++){
+            char[] arr = words[i].toCharArray();
+            String temp = "";
+            for(char c:arr){
+                temp = temp + c;
+                dp[i] += hashMap.getOrDefault(temp, 0);
+            }
+        }
+
+        return dp;
+    }
+}

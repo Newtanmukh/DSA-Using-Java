@@ -1,0 +1,16 @@
+class GfG{
+    
+    public Queue<Integer> rev(Queue<Integer> q){
+         Stack<Integer>st=new Stack<>();
+        for(int s:q)
+        {
+            st.push(s);
+        }
+        q.clear();
+        while(!st.isEmpty())
+        {
+            q.add(st.pop());
+        }
+        return q;
+    }
+}

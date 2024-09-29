@@ -1,0 +1,52 @@
+
+
+class MyQueue {
+
+    int front, rear, count, k;
+	int[] arr;
+    
+    MyQueue()
+	{
+		front=0;
+		rear = 0;
+		count = 0;
+		this.k = 100000;
+		arr = new int[this.k];
+		java.util.Arrays.fill(arr, -1);
+	}
+
+
+	void push(int x)
+	{
+	    if(isFull())
+	        return;
+	        
+        arr[rear] = x;
+        rear = (rear + 1)%k;
+        count++;
+	} 
+
+   
+	int pop()
+	{
+		if(isEmpty())
+		    return -1;
+	    
+	    int ret = arr[front];
+	    arr[front] = -1;
+	    front = (front + 1) % k;
+	    
+	    count--;
+	    return ret;
+	}
+	
+	boolean isFull(){
+	    return this.count == this.k;
+	}
+	
+	boolean isEmpty(){
+	    return this.count == 0;
+	}
+}
+
+
