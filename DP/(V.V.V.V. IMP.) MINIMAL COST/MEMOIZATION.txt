@@ -6,6 +6,11 @@ class Solution {
             
         if(dp[index]!=-1)
             return dp[index];
+
+
+	/*
+		Basically dp[index] here stores the minimum cost to reach n-1 from this index.
+	*/
             
         int minCost = Integer.MAX_VALUE;
         

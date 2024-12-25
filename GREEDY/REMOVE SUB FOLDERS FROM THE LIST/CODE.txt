@@ -1,0 +1,27 @@
+class Solution {
+    public List<String> removeSubfolders(String[] folders) {
+        
+        Arrays.sort(folders);
+        List<String> ans = new ArrayList<>();
+
+        ans.add(folders[0]);
+
+        /***
+            LOGIC In this question is that, sort the folder so that /a/b will be after /a, etc.
+            After that, just keep checking if for the current folder, just the previous folder starts with this or not.
+            if yes, do not add it to the list else add it goddamn it. 
+        ***/
+
+        for(int i=1; i<folders.length; i++){
+
+            String folder = folders[i] ;
+            String prefix = ans.get(ans.size() - 1) + "/";
+            
+            if(!folder.startsWith(prefix)){
+               ans.add(folder); 
+            }
+        }
+
+        return ans;
+    }
+}

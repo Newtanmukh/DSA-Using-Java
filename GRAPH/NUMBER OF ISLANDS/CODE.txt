@@ -1,0 +1,59 @@
+class Solution {
+    // Function to find the number of islands.
+    
+    class Pair{
+        int r;
+        int c;
+        
+        Pair(int r, int c){
+            this.r = r;
+            this.c = c;
+        }
+    }
+    
+    public boolean isValid(int row, int col, char[][] grid){
+        if(row<0 || col<0 || row>=grid.length || col>=grid[0].length)
+            return false;
+        
+        if(grid[row][col]=='1')
+            return true;
+            
+        return false;
+    }
+    
+    public int numIslands(char[][] grid) {
+        int count = 0;
+        int[] rw = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int[] cl = {-1, 0, 1, -1, 1, -1, 0, 1};
+        
+        Deque<Pair> deque = new ArrayDeque<>();
+        
+        for(int i=0; i<grid.length; i++)
+            for(int j=0; j<grid[0].length; j++){
+                if(grid[i][j]=='1'){
+                    count++;
+                    grid[i][j] = '0';
+                    deque.addLast(new Pair(i, j));
+                    
+                    while(deque.size() > 0){
+                        Pair first = deque.peekFirst();
+                        deque.removeFirst();
+                        int row = first.r;
+                        int col = first.c;
+                        
+                        for(int iter=0; iter<8; iter++){
+                            int newRow = row + rw[iter];
+                            int newCol = col + cl[iter];
+                            
+                            if(isValid(newRow, newCol, grid)){
+                                deque.addLast(new Pair(newRow, newCol));
+                                grid[newRow][newCol] = '0';
+                            }
+                        }
+                    }
+                }                
+            }   
+            
+        return count;
+    }
+}

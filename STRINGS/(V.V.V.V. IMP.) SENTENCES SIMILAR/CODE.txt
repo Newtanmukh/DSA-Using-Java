@@ -1,0 +1,32 @@
+class Solution {
+    public boolean areSentencesSimilar(String sentence1, String sentence2) {
+        String[] words1 = sentence1.split("\\s");
+        String[] words2 = sentence2.split("\\s");
+
+        return words1.length <= words2.length ? areSimilar(words1, words2) : areSimilar(words2, words1); 
+    }
+
+    public boolean areSimilar(String[] words1, String[] words2){
+        //assume that words1 has lesser words than words2.
+        //so basically we have to insert some words in words1 so that it would become words2.
+
+        int len1 = words1.length;
+        int len2 = words2.length;
+
+        int matchCount = 0;
+        int i = 0;
+
+        while(i<len1 && words1[i].equals(words2[i])){
+                matchCount++;
+                i++;
+        }
+
+        while(i<len1 && words1[i].equals(words2[len2 - (len1 - i)])){
+            i++;
+            matchCount++;
+        }
+
+        return len1 == matchCount;
+
+    }
+}

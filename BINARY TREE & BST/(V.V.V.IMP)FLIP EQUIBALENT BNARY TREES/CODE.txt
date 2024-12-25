@@ -1,0 +1,55 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+
+
+    public boolean flip(TreeNode root1, TreeNode root2){
+        if(root1==null || root2==null)
+            return root1==root2;//cannot do anything here. if one of the tree is null, and other is not null, then return if both are null or not.
+
+        if(root1.val!=root2.val)
+            return false;
+
+        if(diffVal(root1.left, root2.left)){
+            TreeNode left = root1.left;
+            root1.left = root1.right;
+            root1.right = left;
+        }
+
+        // if(diffVal(root1.right, root2.right)){ /NOTE: Not needed as if the left subtrees are varying , then just swap if. it cant be the case that u swapped left and right coz the left of root1 was not equal to left of root2, annd after swapping also they are agaon different. /
+        //     TreeNode left = root1.left;
+        //     root1.left = root1.right;
+        //     root1.right = left;
+        // }
+
+        return root1.val == root1.val && flip(root1.left, root2.left) && flip(root1.right, root2.right);
+    }
+
+    public boolean diffVal(TreeNode root1, TreeNode root2){
+        
+        if(root1==null || root2==null)
+            return root1!=root2;
+
+        if(root1.val!=root2.val)
+            return true;
+
+        return false;
+    }
+
+    public boolean flipEquiv(TreeNode root1, TreeNode root2) {
+        return flip(root1, root2);
+    }
+}

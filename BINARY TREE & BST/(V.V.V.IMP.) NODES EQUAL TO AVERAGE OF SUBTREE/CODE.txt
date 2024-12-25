@@ -1,0 +1,37 @@
+class Solution {
+
+    class Pair{
+        public int sum;
+        public int numNodes;
+
+        Pair(int sum, int num){
+            this.sum = sum;
+            this.numNodes = num;
+        }
+    }
+
+    int ans = 0;
+    public int averageOfSubtree(TreeNode root) {
+        ans = 0;
+        dfs(root);
+        return ans;
+    }
+
+    public Pair dfs(TreeNode root){
+        if(root==null)
+            return new Pair(0, 0);
+        
+        Pair left = dfs(root.left);
+        Pair right = dfs(root.right);
+
+        int resSum = left.sum + right.sum + root.val;
+        int nodes = left.numNodes + right.numNodes + 1;
+
+        int avg = resSum / nodes;
+
+        if(avg==root.val)
+            ans++;
+
+        return new Pair(resSum, nodes);
+    }
+}

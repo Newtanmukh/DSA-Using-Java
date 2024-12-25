@@ -1,0 +1,18 @@
+class Solution {
+    public boolean checkIfExist(int[] arr) {
+        Map<Integer, Integer> hashMap = new HashMap<>();
+        
+        for(int num: arr){
+            int check = 2*num;
+            if(hashMap.containsKey(check))
+                return true;
+            
+            if(num%2==0 && hashMap.containsKey(num/2))
+                return true;
+
+            hashMap.put(num, hashMap.getOrDefault(num, 0) + 1 );
+        }
+
+        return false;
+    }
+}

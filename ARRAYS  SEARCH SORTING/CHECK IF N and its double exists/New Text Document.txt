@@ -1,0 +1,65 @@
+//https://leetcode.com/problems/keep-multiplying-found-values-by-two/
+
+
+
+
+public int findFinalValue(int[] nums, int original) {
+        
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        
+        for(int i: nums){
+            hashMap.put(i, hashMap.getOrDefault(i, 0) + 1);
+        }
+        
+        // for(int i=10; i>=0; i--){
+        //     int check = original << i;
+        //     if(hashMap.containsKey(check)){
+        //         return 2*check;
+        //     }
+        // }
+
+        // for(int i=0; i<10; i++){
+            // int check = original << i;
+            while(hashMap.containsKey(original)){
+                original = original << 1;
+            }
+        // }
+
+        return original;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+    public int findFinalValue(int[] nums, int original) {
+       int result=original;
+        for(int i=0;i<nums.length;i++){
+            if(result==nums[i]){
+                result*=2;
+                i=-1;//its because after this step, it will get incremented to i=0, and well it will get start over again.
+            }
+        }
+        return result;
+    }
+}
+
+
+
+
+
+
+

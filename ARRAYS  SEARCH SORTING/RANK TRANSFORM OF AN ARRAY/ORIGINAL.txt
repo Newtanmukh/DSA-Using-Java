@@ -1,0 +1,44 @@
+class Solution {
+
+    class Pair{
+        int val;
+        int index;
+        int rank;
+        Pair(int val, int index){
+            this.val = val;
+            this.index = index;
+            this.rank = 1;
+        }
+    }
+
+    public int[] arrayRankTransform(int[] arr) {
+        List<Pair> list = new ArrayList<>();
+        int[] ranks = new int[arr.length];
+        Arrays.fill(ranks, 1);
+
+        for(int i =0; i<arr.length; i++){
+            list.add(new Pair(arr[i], i));
+        }
+
+        Collections.sort(list, new Comparator<Pair>(){
+
+            @Override
+            public int compare(Pair lhs, Pair rhs){
+                return Integer.compare(lhs.val, rhs.val);
+            }
+        });
+        
+        int r = 1;
+        for(int i=0; i<list.size(); i++){
+            ranks[list.get(i).index] = r;
+
+            while(i+1<arr.length && list.get(i+1).val==list.get(i).val){
+                ranks[list.get(i+1).index] = r;
+                i++;
+            }
+            r++;
+        }
+
+        return ranks;
+    }
+}

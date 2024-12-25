@@ -1,0 +1,139 @@
+class Solution {
+
+    HashMap<TreeNode, TreeNode> childToParentMap;
+    int kNodes;
+    List<Integer> ans;
+    int k;
+
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        childToParentMap  = new HashMap<>();
+        kNodes = 0;
+        ans = new ArrayList<>();
+        this.k = k;
+
+        populateParentMap(root);
+
+        List<Integer> nodes = new ArrayList<>();
+
+        countKchildNodes(target);
+        countKparentNodes(target);
+
+        return ans;
+    }
+    
+    public void countKparentNodes(TreeNode root){
+        int level = 0;
+        while(childToParentMap.get(root)!=null){
+            TreeNode parent = childToParentMap.get(root);
+            level++;
+            if(parent.left==root){
+                traverseLeft(parent, level, false);
+            }else{
+                traverseLeft(parent, level, true);
+            }
+
+            if(level==this.k)
+                ans.add(parent.val);
+
+            if(level>this.k)
+                break;
+            root = parent;
+        }
+    }
+
+    public void traverseLeft(TreeNode root, int curr, boolean left){
+        curr++;
+        if(left){
+            root = root.left;
+        }else{
+            root = root.right;
+        }
+
+        if(root==null)
+            return;
+
+        if(curr==this.k){
+            ans.add(root.val);
+            return;
+        }
+
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.addLast(root);
+
+        while(!deque.isEmpty()){
+            int size = deque.size();
+            
+
+            for(int i=0; i<size; i++){
+                TreeNode front = deque.peekFirst();
+                deque.removeFirst();
+
+                if(curr==this.k){
+                    ans.add(front.val);
+                }
+
+                if(front.left!=null){
+                    deque.addLast(front.left);
+                }
+
+                if(front.right!=null){
+                    deque.addLast(front.right);
+                }
+            }
+            
+            curr++;
+            if(curr>this.k)
+                break;
+        }
+    }
+
+    public void countKchildNodes(TreeNode root){
+        int level = 0;
+        Deque<TreeNode> deque = new ArrayDeque<>();
+
+        deque.addLast(root);
+        while(!deque.isEmpty()){
+            int size = deque.size();
+            
+            for(int i=0; i<size; i++){
+                TreeNode front = deque.peekFirst();
+                deque.removeFirst();
+                if(level==k){
+                    ans.add(front.val);
+                }
+                if(front.left!=null)
+                    deque.addLast(front.left);
+
+                if(front.right!=null)
+                    deque.addLast(front.right);
+            }
+            level++;
+            if(level>k)
+                break;
+        }
+    }
+
+    public void populateParentMap(TreeNode root){
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.addLast(root);
+        childToParentMap.put(root, null);
+
+        while(!deque.isEmpty()){
+            int size = deque.size();
+            for(int i=0; i<size; i++){
+                TreeNode front = deque.peekFirst();
+                deque.removeFirst();
+
+                if(front.left!=null){
+                    childToParentMap.put(front.left, front);
+                    deque.addLast(front.left);
+                }
+
+                if(front.right!=null){
+                    childToParentMap.put(front.right, front);
+                    deque.addLast(front.right);
+                }
+            }
+        }
+    }
+}

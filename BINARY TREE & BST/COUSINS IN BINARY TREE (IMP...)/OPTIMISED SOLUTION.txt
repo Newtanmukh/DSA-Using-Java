@@ -1,0 +1,54 @@
+
+class Solution {
+
+    public boolean isCousins(TreeNode root, int x, int y) {
+        
+        if(root==null)
+            return false;
+
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.addLast(root);
+
+        while(deque.size() > 0){
+            int size = deque.size();
+            boolean isAexist = false;
+            boolean isBexist = false;
+
+            for(int i = 0; i<size; i++){
+                
+                TreeNode front = deque.peekFirst();
+                if(front.val==A)
+                    isAexist = true;
+
+                if(front.val==B)
+                    isBexist = true;
+//check the current nodes left and right, if children are A and B /vice versa, return false;
+//also check if the current node is A and B, and in the current level if you find both A and B, return true;  
+                if(front.left != null && front.right != null){
+                    
+                    if(cur.left.val==A && cur.right.val==B){
+                        return false;
+                    }
+
+                    if(cur.left.val==B && cur.right.val==A){
+                        return false;
+                    }
+                }
+
+                if(front.left!=null){
+                    deque.addLast(front.left);
+                }
+
+                if(front.right!=null){
+                    deque.addLast(front.right);
+                }
+            }
+
+            if(isAexist && isBexist)
+                return true;
+        }
+
+        return false;
+
+    }
+}

@@ -1,0 +1,43 @@
+class Solution {
+    public boolean checkInclusion(String s, String t) {
+
+        char[] s1 = s.toCharArray();
+        char[] s2 = t.toCharArray();
+
+        int len1 = s.length();
+        int len2 = t.length();
+
+        if(len1 > len2)
+            return false;
+
+        int[] count = new int[26];
+        Arrays.fill(count, 0);
+        
+        for(int i=0; i<len1; i++){
+            count[s2[i]-'a']++;
+            count[s1[i]-'a']--;
+        }
+
+        if(isFilled(count))
+            return true;
+
+        for(int i=len1; i<len2; i++){
+            count[s2[i]-'a']++;
+            count[s2[i-len1]-'a']--;
+            if(isFilled(count))
+                return true;
+        }
+
+        return false;
+
+    }
+
+    public boolean isFilled(int[]count){
+        for(int i=0; i<26; i++){
+            if(count[i]!=0)
+                return false;
+        }
+
+        return true;
+    }
+}

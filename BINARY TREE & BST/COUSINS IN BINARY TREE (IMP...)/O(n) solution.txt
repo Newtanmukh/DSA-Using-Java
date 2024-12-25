@@ -1,0 +1,60 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+
+    public boolean isCousins(TreeNode root, int x, int y) {
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        
+        if(root==null)
+            return false;
+
+        int[] parent = new int[101];
+        int[] level = new int[101];
+
+        Arrays.fill(level, 0);
+        Arrays.fill(parent, -1);
+        
+        deque.addLast(root);
+
+        level[root.val] = 0;
+
+        while(deque.size() > 0){
+            int size = deque.size();
+            for(int i=0; i<size; i++){
+                TreeNode front = deque.peekFirst();
+                deque.removeFirst();
+
+                if(front.left!=null){
+                    parent[front.left.val] = front.val;
+                    level[front.left.val] = level[front.val] + 1;
+                    deque.addLast(front.left);
+                }
+
+                if(front.right!=null){
+                    parent[front.right.val] = front.val;
+                    level[front.right.val] = level[front.val] + 1;
+                    deque.addLast(front.right);
+                }
+            }    
+        }
+
+        if(level[x]==level[y] && parent[x]!=parent[y])
+            return true;
+
+        return false;
+
+    }
+}

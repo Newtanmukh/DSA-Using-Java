@@ -1,0 +1,75 @@
+class Solution {
+
+    HashMap<Integer, Long> hashMap;
+
+    public int countSquares(int[][] matrix) {
+    //     hashMap = new HashMap<>();
+    //    long count = 0;
+
+    //    int m = matrix.length;
+    //    int n = matrix[0].length;
+
+    //     int[][] dp = new int[m][n];
+
+    //     for(int i=0; i<m; i++)
+    //         for(int j=0; j<n; j++){
+    //             dp[i][j] = (int)(matrix[i][j] - 0);
+    //     }
+
+    //     for(int i=1; i<m; i++)
+    //         for(int j=1; j<n; j++){
+    //             if(matrix[i][j]=='1')
+    //                 dp[i][j] = 1 + Math.min(dp[i-1][j], Math.min(dp[i-1][j-1], dp[i][j-1]));
+    //         }
+
+        
+    //     for(int i=0; i<m; i++)
+    //         for(int j=0; j<n; j++){
+    //             if(dp[i][j] > 0){
+    //                 count = count + func(dp[i][j]) - func(dp[i][j]-1);
+    //             }
+    //         }
+
+    //     System.out.println(hashMap);
+    //     return (int)count;
+
+
+
+
+        int count = 0;
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+    
+        int[][] dp = new int[m][n];
+//Look at this problem like this, let us say at arr[5][5] the value is 6, then without this cell, we were missing 6 squares: one of size 1, one of 2 , one of 3 and so on till 6. as a result of which we are adding it incorporating for the same.
+
+        for(int i=0; i<m; i++)
+            for(int j=0; j<n; j++){
+                if(i>0 && j>0 && matrix[i][j]==1)
+                    dp[i][j] = 1 + Math.min(dp[i-1][j-1], Math.min(dp[i-1][j], dp[i][j-1]));
+                else
+                    dp[i][j] = matrix[i][j];
+                count += dp[i][j];
+        }
+
+        return count;
+
+
+    }
+
+    // long func(int n){
+    //     if(n==0)
+    //         return 0;
+        
+    //     if(hashMap.containsKey(n))
+    //         return hashMap.get(n);
+
+    //     long val = n*(n+1)*(2*n+1);
+    //     val = val/6l;
+
+    //     hashMap.put(n,  val);
+
+    //     return hashMap.get(n);
+    // }
+}

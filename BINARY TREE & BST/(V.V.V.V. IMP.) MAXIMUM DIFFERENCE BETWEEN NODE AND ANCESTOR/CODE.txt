@@ -1,0 +1,48 @@
+class Solution {
+    // int ans;
+    // public int maxAncestorDiff(TreeNode root) {
+    //     ans = Integer.MIN_VALUE;
+    //     retMaxDiff(root);
+    //     return ans;
+    // }
+
+    // public int retMaxDiff(TreeNode root){
+    //     if(root==null)
+    //         return -1;
+
+    //     int left = retMaxDiff(root.left);
+    //     int right = retMaxDiff(root.right);
+
+    //     int maxi = Math.max(left, right);
+    //     int mini = Math.min(left, right);
+
+    //     if(maxi!=-1){//basically if the current node is NOT the root Node.
+    //         ans = Math.max(ans, Math.abs(root.val - maxi));
+    //         if(mini!=-1){
+    //             ans = Math.max(ans, Math.abs(root.val - mini));
+    //         }
+    //     }
+
+    //     return Math.max(root.val, Math.max(left, right));//wrong , we should return the max and min both.
+    // }
+
+    public int maxAncestorDiff(TreeNode root) {
+        return helper(root, root.val, root.val);
+    }
+
+    public int helper(TreeNode root, int min, int max) {
+        if (root == null) {
+            return max - min;//basically when we have come to the root node, for a particular path, we know the max and min values.
+        }
+
+        min = Math.min(min, root.val);//in the current path, figure out the minimum value node.
+        max = Math.max(max, root.val);//in the current path, figure out the maximumn value node.
+
+        int left = helper(root.left, min, max);//returning the max difference value from the left subtree.
+        int right = helper(root.right, min, max);//returning the max difference value from the right subtree.
+        
+        return Math.max(left, right);//returning the max values of from left and right subtree
+    }
+
+
+}

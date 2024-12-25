@@ -1,0 +1,104 @@
+class Solution {
+
+    class Pair{
+        private int node;
+        private int distance;
+
+        public Pair(int node, int distance){
+            this.node = node;
+            this.distance = distance;
+        }
+
+        public int getNode(){
+            return this.node;
+        }
+
+        public int getDistance(){
+            return this.distance;
+        }
+    }
+
+    public int minimumDiameterAfterMerge(int[][] edges1, int[][] edges2) {
+        int n = edges1.length + 1;
+        int m = edges2.length + 1;
+
+        List<List<Integer>> adjList1 = buildGraph(n, edges1);
+        List<List<Integer>> adjList2 = buildGraph(m, edges2);
+
+        int dia1 = findDia(n, adjList1);
+        int dia2 = findDia(m, adjList2);
+
+        int combinedDiameter = ((dia1 + 1)/2) + ((dia2 + 1)/2) + 1;
+
+        return Math.max(dia1, Math.max(dia2, combinedDiameter)); 
+    }
+
+    private int findDia(int n, List<List<Integer>> adjList){
+        Pair first = bfs(n, 0, adjList);
+        int diaNode = first.getNode();
+
+        Pair second = bfs(n, diaNode, adjList);
+        
+        return second.getDistance();
+    }
+
+    private Pair bfs(int n, int source, List<List<Integer>> adjList){
+        int maxDistance = 0;
+        int farthestNode = source;
+
+        Deque<Integer> deque = new ArrayDeque<>();
+        int[] dp = new int[n];
+        boolean[] visited = new boolean[n];
+
+        Arrays.fill(dp, 0);
+        Arrays.fill(visited, false);
+        deque.addLast(source);
+
+        visited[source] = true;
+        int level = 0;
+
+        while(!deque.isEmpty()){
+            int size = deque.size();
+
+            for(int i=0; i<size; i++){
+                int frontNode = deque.peekFirst();
+                deque.removeFirst();
+
+                dp[frontNode] = level;
+                maxDistance = level;
+                farthestNode = frontNode;
+
+                for(int neighbour: adjList.get(frontNode)){
+                    if(!visited[neighbour]){
+                        visited[neighbour] = true;
+                        deque.addLast(neighbour);
+                    }
+                }
+            }
+            level++;
+        }
+        return new Pair(farthestNode, maxDistance);
+    }
+
+    List<List<Integer>> buildGraph(int n, int[][] edges){
+        List<List<Integer>> adjList = new ArrayList<>();
+
+        for(int i=0; i<n; i++){
+            adjList.add(new ArrayList<>());
+        }
+
+        for(int[] edge: edges){
+            int u = edge[0];
+            int v = edge[1];
+            List<Integer> first = adjList.get(u);
+            first.add(v);
+            adjList.set(u, first);
+
+            List<Integer> second = adjList.get(v);
+            second.add(u);
+            adjList.set(v, second);
+        }
+
+        return adjList;
+    }
+}
