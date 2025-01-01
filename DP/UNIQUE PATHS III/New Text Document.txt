@@ -1,0 +1,103 @@
+class Solution {
+
+    class Pair{
+        public int row;
+        public int col;
+
+        Pair(int row, int col){
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    Pair source;
+    Pair destination;
+    int totalPaths;
+    boolean[][] visited;
+    int[][] grid;
+    int emptySquares;
+
+    public Pair returnTargetPair(int[][] grid, int target){
+        int rows = grid.length;
+        int cols = grid[0].length;
+
+        for(int i=0; i<rows; i++)
+            for(int j=0; j<cols; j++){
+             if(grid[i][j]==target){
+                Pair newPair = new Pair(i, j);
+                return newPair;
+             }   
+        }
+
+        return null;
+    }
+
+    public boolean isInvalidCell(int i, int j){
+        int rows = grid.length;
+        int cols = grid[0].length;
+
+        if(i<0 || i>=rows || j<0 || j>=cols || visited[i][j] || grid[i][j]==-1)
+            return true;
+
+        return false;
+    }
+
+    public boolean isDestinationCell(int i, int j, int numEm){
+        return i==destination.row && j==destination.col && numEm == emptySquares;
+    }
+
+    void dfs(int i, int j, int numEm){
+        
+        if(isInvalidCell(i, j))
+            return;
+
+        if(isDestinationCell(i, j, numEm)){
+            totalPaths++;
+            return;
+        }
+
+        visited[i][j] = true;
+
+        if(grid[i][j]==0)
+            numEm++;
+
+        dfs(i+1, j, numEm );
+        dfs(i-1, j, numEm );
+        dfs(i, j+1, numEm );
+        dfs(i, j-1, numEm );
+        
+        visited[i][j] = false;
+    }
+
+    public int returnEmptySquares(){
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int emptyCells = 0;
+
+        for(int i=0; i<rows; i++)
+            for(int j=0; j<cols; j++){
+                if(grid[i][j]==0)
+                    emptyCells++;
+            }
+
+        return emptyCells;
+    }
+
+    public int uniquePathsIII(int[][] grid) {
+        source = returnTargetPair(grid, 1);
+        destination = returnTargetPair(grid, 2);
+        totalPaths = 0;
+        this.grid = grid;
+        visited = new boolean[grid.length][grid[0].length];
+        
+        for(int i=0; i<visited.length; i++){
+            Arrays.fill(visited[i], false);
+        }
+
+        emptySquares = returnEmptySquares();
+
+        dfs(source.row, source.col, 0);
+
+        return this.totalPaths;
+    }
+}

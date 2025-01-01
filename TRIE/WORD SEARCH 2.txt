@@ -1,0 +1,87 @@
+class Solution {
+
+    List<String> ans;
+
+    class TreeNode{
+        TreeNode[] next = new TreeNode[26];
+        String word;
+    }
+
+    public TreeNode buildTree(String[] words){
+        TreeNode root = new TreeNode();
+
+        for(String word: words){
+            TreeNode p = root;
+            char[] charArray = word.toCharArray();
+            for(char c: charArray){
+                int i = c - 'a';
+                
+                if(p.next[i]==null){
+                    p.next[i] = new TreeNode();
+                }
+                p = p.next[i];
+            }
+            p.word = word;
+        }
+
+        return root;
+    }
+
+    public boolean isInvalid(int i, int j, char[][] board){
+        int rows = board.length;
+        int cols = board[0].length;
+
+        if(i<0 || j<0 || i>=rows || j>=cols)
+            return true;
+        
+        return false;
+    }
+
+    public void dfs(int i, int j, char[][] board, TreeNode root){
+        
+        if(isInvalid(i, j, board)){
+            return;
+        }
+
+        char c = board[i][j];
+
+        if(c=='#' || root.next[c-'a']==null){
+            return;
+        }
+
+        root = root.next[c - 'a'];
+
+        if(root.word != null){
+            ans.add(root.word);
+            root.word = null;
+        }
+
+        board[i][j] = '#';
+
+        dfs(i+1, j, board, root);
+        dfs(i-1, j, board, root);
+        dfs(i, j+1, board, root);
+        dfs(i, j-1, board, root);
+
+        board[i][j] = c;
+    }
+
+    public List<String> findWords(char[][] board, String[] words) {
+        ans = new ArrayList<>();
+
+        TreeNode root = buildTree(words);
+
+        int rows = board.length;
+        int cols = board[0].length;
+
+        for(int i=0; i<rows; i++)
+            for(int j=0; j<cols; j++){
+                dfs(i, j, board, root);
+            }
+
+
+        return ans;
+    }
+
+    
+}

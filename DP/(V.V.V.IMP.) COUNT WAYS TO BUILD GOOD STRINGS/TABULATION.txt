@@ -1,0 +1,36 @@
+class Solution {
+
+    public int num = 0;
+
+    public int mod = (int)(1e9 + 7);
+
+    public int[] dp;
+
+    public int countGoodStrings(int low, int high, int numZeroes, int numOnes) {
+        dp = new int[high + 1];
+        Arrays.fill(dp, 0);
+        dp[0] = 1;
+
+        int ans = 0;
+
+        for(int i=1; i<=high; i++){
+
+            if(i>=numZeroes){
+                dp[i] = (dp[i] + dp[i - numZeroes])%mod;
+            }
+
+            if(i>=numOnes){
+                dp[i] = (dp[i] + dp[i - numOnes])%mod;
+            }
+
+            dp[i] = dp[i]%mod;
+
+            if(i>=low){
+                ans = ans + dp[i];
+                ans = ans % mod;
+            }
+        }
+
+        return ans;
+    }
+}

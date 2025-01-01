@@ -1,0 +1,51 @@
+class Solution {
+     public void solveSudoku(char[][] board) {
+        sudoku(board);
+    }
+    
+
+    public boolean sudoku(char[][] board){
+        int rows = board.length;
+        int cols = board[0].length;
+
+        for(int i=0; i<rows; i++)
+            for(int j=0; j<cols; j++){
+                if(board[i][j]=='.'){
+                    
+                    for(char c='1'; c<='9'; c++){
+                        if(isValidCell(board, i, j, c)){
+                            board[i][j] = c;
+
+                            boolean isSudoku = sudoku(board);
+                            if(isSudoku)
+                                return true;
+
+                            board[i][j] = '.';
+                        }
+                    }
+
+                    //means that none of characters from 1 till 9, 
+                    //could satisfy the sudoku for this particular space.
+                    return false;
+                }
+            }
+            return true;//this will be called in the very last, basically when everything has been done and the table is full.
+    }
+
+
+     boolean isValidCell(char[][] board, int row, int col, char c){
+
+        for(int i=0; i<9; i++){
+            if(board[i][col]==c || board[row][i]==c)
+                return false;
+
+            int rowIndex = 3*(row/3) + i/3;
+            int colIndex = 3*(col/3) + (i%3);
+            
+            if(board[rowIndex][colIndex]==c)
+                return false;
+        }
+
+        return true;
+    }
+}

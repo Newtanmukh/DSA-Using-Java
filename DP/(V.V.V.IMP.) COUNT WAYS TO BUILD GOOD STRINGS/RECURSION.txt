@@ -1,0 +1,21 @@
+class Solution {
+
+    public int num = 0;
+    public void recursion(int curr, int low, int high, int numZeroes, int numOnes){
+        if(curr > high)
+            return;
+
+        if(curr<=high && curr>=low){
+            num++;
+        }
+
+        recursion(curr + numZeroes, low, high, numZeroes, numOnes);
+        recursion(curr + numOnes, low, high, numZeroes, numOnes);
+    }
+
+    public int countGoodStrings(int low, int high, int zero, int one) {
+        num = 0;   
+        recursion(0, low, high, zero, one);
+        return num;    
+    }
+}

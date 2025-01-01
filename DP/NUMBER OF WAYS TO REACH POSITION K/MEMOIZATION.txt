@@ -1,0 +1,30 @@
+class Solution {
+
+    public int mod = (int)(1e9 + 7); 
+    int[][] dp;
+
+    public int recursion(int start, int end, int k){
+        if(k==0){
+            if(start==end)
+                return 1;
+
+            return 0;
+        }
+
+        if(dp[start + 2001][k] != -1)
+            return dp[start + 2001][k];
+
+        return dp[start + 2001][k] = (recursion(start + 1, end, k-1) + recursion(start - 1, end, k-1)) % mod ;
+    }
+
+    public int numberOfWays(int startPos, int endPos, int k) {
+
+        dp = new int[4001][1001];
+        
+        for(int i=0; i<4001; i++){
+            Arrays.fill(dp[i], -1);
+        }
+
+        return recursion(startPos, endPos, k);
+    }
+}

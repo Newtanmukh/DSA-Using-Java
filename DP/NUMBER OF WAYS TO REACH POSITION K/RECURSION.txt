@@ -1,0 +1,22 @@
+class Solution {
+
+    public int mod = (int)(1e9 + 7); 
+
+    public int recursion(int start, int end, int k){
+        if(k==0){
+            if(start==end)
+                return 1;
+
+            return 0;
+        }
+
+        int a = recursion(start + 1, end, k-1);
+        int b = recursion(start - 1, end, k-1);
+
+        return (a + b) %mod;
+    }
+
+    public int numberOfWays(int startPos, int endPos, int k) {
+        return recursion(startPos, endPos, k);
+    }
+}

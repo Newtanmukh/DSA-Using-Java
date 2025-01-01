@@ -1,0 +1,38 @@
+class Solution {
+    public int maxScore(String s) {
+        int n = s.length();
+
+        int numZeroes = 0;
+        for(char c: s.toCharArray()){
+            if(c=='0')
+                numZeroes++;
+        }
+        
+        int numOnes = n - numZeroes;
+
+        int numZeroesTillNow = 0;
+        int numOfOnesTillNow = 0;
+
+        int maxi = Integer.MIN_VALUE;
+
+        // maxi = Math.max(maxi, numZeroesTillNow + numOnes - numOfOnesTillNow);
+
+
+        int i = 0;
+        for(char c: s.toCharArray()){
+            if(i==s.length()-1)
+                continue;
+
+            if(c=='0')
+                numZeroesTillNow++;
+            else
+                numOfOnesTillNow++;
+            
+            maxi = Math.max(maxi, numZeroesTillNow + numOnes - numOfOnesTillNow);
+            i++;
+        }
+
+        return maxi; 
+
+    }
+}

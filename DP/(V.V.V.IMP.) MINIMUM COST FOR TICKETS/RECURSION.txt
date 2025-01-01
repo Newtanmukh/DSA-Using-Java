@@ -1,0 +1,34 @@
+class Solution {
+
+    int dailyCost;
+    int sevenDayCost;
+    int thirtyDayCost;
+
+    int minCost;
+
+    public void recursion(int index, int totalCost, int[] days, int maxDate){
+
+        if(index==days.length){
+            minCost = Math.min(minCost, totalCost);
+            return;
+        }
+
+        if(maxDate < days[index]){
+            recursion(index + 1, totalCost + dailyCost, days, maxDate + 1);
+            recursion(index + 1, totalCost + sevenDayCost, days, maxDate + 7);
+            recursion(index + 1, totalCost + thirtyDayCost, days, maxDate + 30);
+        }else{
+            recursion(index + 1, totalCost, days, maxDate);
+        }
+    }
+
+    public int mincostTickets(int[] days, int[] costs) {
+        dailyCost = costs[0];
+        sevenDayCost = costs[1];
+        thirtyDayCost = costs[2];
+        minCost = Integer.MAX_VALUE;
+        recursion(0, 0, days, 0);
+
+        return minCost;
+    }
+}

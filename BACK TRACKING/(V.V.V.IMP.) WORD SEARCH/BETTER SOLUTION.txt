@@ -1,0 +1,61 @@
+class Solution {
+
+    public char[] originalWord;
+
+    public boolean isInvalidCell(int i, int j, char[][] board){
+        int rows = board.length;
+        int cols = board[0].length;
+
+        if(i<0 || i>=rows || j<0 || j>=cols)
+            return true;
+        
+        return false;
+    }
+
+    public boolean dfs(int i, int j, char[][] board, int index){
+        
+        if(index==originalWord.length){
+            return true;
+        }
+        
+        if(isInvalidCell(i, j, board)){
+            return false;
+        }
+
+        if(board[i][j]!=originalWord[index]){
+            return false;
+        }
+        
+        char ok = board[i][j];
+        board[i][j] = '*';
+
+        boolean isPossible = dfs(i+1, j, board, index+1) || 
+                             dfs(i, j+1, board, index+1) || 
+                             dfs(i-1, j, board, index+1) ||  
+                             dfs(i, j-1, board, index+1);
+
+        board[i][j] = ok;
+
+        return isPossible;
+    }
+
+    public boolean exist(char[][] board, String word) {
+        originalWord = word.toCharArray();
+ 
+
+        int rows = board.length;
+        int cols = board[0].length;
+
+        for(int i=0; i<rows; i++)
+            for(int j=0; j<cols; j++){
+                boolean isWordExist = dfs(i, j, board, 0);
+
+                if(isWordExist)
+                    return true;
+                
+                dfs(i, j, board, 0);
+            }
+
+        return false;
+    }
+}
