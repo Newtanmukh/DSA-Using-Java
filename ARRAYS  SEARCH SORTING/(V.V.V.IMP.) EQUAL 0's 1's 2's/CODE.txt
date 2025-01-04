@@ -1,0 +1,35 @@
+class Solution 
+{ 
+    long getSubstringWithEqual012(String str) 
+    { 
+        long count = 0;
+        
+        HashMap<String, Long> hashMap = new HashMap<>();
+        int c0=0;
+        int c1=0;
+        int c2=0;
+        
+        char[] arr = str.toCharArray();
+        
+        for(char c:arr){
+            
+            if(c=='0')
+                c0++;
+            else if(c=='1')
+                c1++;
+            else
+                c2++;
+                
+            if(c0==c1 && c0==c2)
+                count++;
+            
+            String key = (c1-c0) + "#" + (c2-c0);
+            
+            count += hashMap.getOrDefault(key, 0L);
+            
+            hashMap.put(key, hashMap.getOrDefault(key, 0L) + 1);
+        }
+        
+        return count;
+    }
+}

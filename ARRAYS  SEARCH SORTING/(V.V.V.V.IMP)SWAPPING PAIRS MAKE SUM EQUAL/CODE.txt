@@ -1,0 +1,65 @@
+
+class Solution {
+    boolean findSwapValues(int[] one, int[] two) {
+        // Your code goes here
+        
+        long totalSum = 0;
+        
+        for(int a: one)
+            totalSum += a;
+            
+        for(int b: two)
+            totalSum -= b;
+            
+
+        totalSum = totalSum;
+        
+        if(totalSum%2==1L)
+            return false;
+            
+        if(totalSum==0L)
+            return true;
+            
+        long diff = totalSum/2;
+        
+        HashMap<Long, Boolean> hashMap = new HashMap<>();
+        
+        for(int b: two)
+            hashMap.put((long)b, true);
+            
+        
+        for(int a: one){
+            long difference = (long) a - diff;
+            if(hashMap.containsKey(difference) && hashMap.get(difference)==true){
+                return true;
+            }
+        }
+        
+        return false;
+        
+        
+        // long sumA = 0;
+        // long sumB = 0;
+        // for (long num : a) sumA += num;
+        // for (long num : b) sumB += num;
+        
+        // // Check if the difference is even
+        // long diff = sumA - sumB;
+        // if (diff % 2 != 0) return false;  // Cannot find pairs if diff is not even
+        
+        // long target = diff / 2;
+        
+        // // Use a set to store elements of one array
+        // Set<Long> set = new HashSet<>();
+        // for (long num : a) set.add(num);
+        
+        // // Check for each element in array b
+        // for (long num : b) {
+        //     if (set.contains(num + target)) {
+        //         return true;
+        //     }
+        // }
+        
+        // return false;
+    }
+}

@@ -1,0 +1,49 @@
+class Solution {
+    public int countPalindromicSubsequence(String s) {
+        int[] prefix = new int[26];//will store the first index of each character.
+        int[] suffix = new int[26];//will store the last index of each character.
+        int[] uniqueChars = new int[s.length()];//will store the number of unique characters till this point.
+
+        Arrays.fill(prefix, -1);
+        Arrays.fill(suffix, -1);
+
+        // int uniqueCount = 0;
+        long count = 0L;
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+
+        char[] arr = s.toCharArray();
+
+        for(int i=0; i<arr.length; i++){
+            hashMap.put(arr[i], hashMap.getOrDefault(arr[i], 0) + 1);
+            uniqueChars[i] = hashMap.size();
+
+            int val = arr[i] - 'a';
+            if(prefix[val]==-1){
+                prefix[val] = i;
+            }
+
+            suffix[val] = i;
+        }
+
+        for(int i=0; i<26; i++){
+            
+            if(prefix[i]==-1 || (prefix[i]==suffix[i]) || (suffix[i]==prefix[i]+1))//if a character has not occured at all OR character occured only once OR character occured only twice but beside each other.
+                continue;
+
+
+
+
+
+            HashSet<Character> set = new HashSet<>();
+
+            for(int j=prefix[i]+1; j<suffix[i]; j++){
+                set.add(arr[j]);
+            }
+
+            count += set.size();
+
+        }
+
+        return (int)count;
+    }
+}
