@@ -1,0 +1,41 @@
+ int countPairs(int arr[], int target) {
+        
+        int left = 0;
+        int right = arr.length - 1;
+        int count = 0;
+        
+        Arrays.sort(arr);
+        
+        while(left < right){
+            if(arr[left] + arr[right]==target){
+                int elm1 = arr[left];
+                int elm2 = arr[right];
+                
+                int count1 = 0;
+                int count2 = 0;
+                
+                while(arr[left]==elm1){
+                    count1++;
+                    left++;
+                }
+                
+                while(arr[right]==elm2){
+                    right--;
+                    count2++;
+                }
+                
+                if(elm1==elm2){
+                    count = count + (count1 * (count1-1))/2;
+                }else{
+                    count += count1*count2;
+                }
+            }else if(arr[left] + arr[right] > target){
+                right--;
+            }else{
+                left++;
+            }
+        }
+        
+        return count;
+        
+    }

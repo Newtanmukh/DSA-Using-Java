@@ -1,0 +1,25 @@
+class Solution {
+    public String shiftingLetters(String s, int[] shifts) {
+        int n = shifts.length;
+        
+        long[] prefix = new long[s.length()];
+
+        Arrays.fill(prefix, 0L);
+        StringBuilder sb = new StringBuilder();
+
+        for(int i=shifts.length - 1; i>=0; i--){
+            if(i!=shifts.length-1)
+                prefix[i] = prefix[i+1] + shifts[i];
+            else
+                prefix[i] = shifts[i];
+            
+            long val = (s.charAt(i) - 'a') + prefix[i];
+            
+            val = val % 26;
+            // s.setCharAt(i,  (char)('a' + val));
+            sb.append((char)('a' + (int)val));
+        } 
+
+        return sb.reverse().toString();
+    }
+}

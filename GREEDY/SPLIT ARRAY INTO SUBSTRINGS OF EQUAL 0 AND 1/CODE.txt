@@ -1,0 +1,22 @@
+class Solution {
+    public static int maxSubStr(String str) {
+         int ones = 0;
+        int count = 0;
+        char[] arr = str.toCharArray();
+        
+        for(char c: arr){
+            if(c=='1')
+                ones++;
+            else 
+                ones--;
+                
+            count = count + (ones==0 ? 1: 0);
+        }
+        
+        if(ones!=0)
+            return -1;
+            
+        return count;    
+        
+    }
+}

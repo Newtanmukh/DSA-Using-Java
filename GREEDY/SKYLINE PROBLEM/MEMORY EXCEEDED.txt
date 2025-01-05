@@ -1,0 +1,39 @@
+class Solution {
+    public List<List<Integer>> getSkyline(int[][] buildings) {
+        long[] prefix = new long[Integer.MAX_VALUE];
+        
+        for(int[] building: buildings){
+            int left = building[0];
+            int right = building[1];
+            int height = building[2];
+
+            prefix[left] += height;
+
+            if(right!=prefix.length-1){
+                prefix[right + 1] -= height;
+            }
+        }
+
+        List<List<Integer>> list = new ArrayList<>();
+
+        if(prefix[0]!=0){
+            List<Integer> skyline = new ArrayList<>();
+            skyline.add(0);
+            skyline.add((int)prefix[0]);
+            list.add(skyline);
+        }
+
+        for(int i=1; i<prefix.length; i++){
+            prefix[i] = prefix[i] + prefix[i-1];
+
+            if(prefix[i]!=0 && prefix[i] != prefix[i-1]){
+                List<Integer> skyline = new ArrayList<>();
+                skyline.add(i);
+                skyline.add((int)prefix[i]);
+                list.add(skyline);
+            }
+        }
+
+        return list;
+    }
+}
