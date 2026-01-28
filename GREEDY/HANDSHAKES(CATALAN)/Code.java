@@ -1,3 +1,5 @@
+//Problem statement: https://www.geeksforgeeks.org/problems/handshakes1303/1
+
 class Code {
     static int count(int n) {
         // code here
