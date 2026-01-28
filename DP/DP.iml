@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/2 KEYS KEYBOARD (V.V.V IMP)" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/FRACTIONAL KNAPSACK" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LONGEST REPEATING SUBSEQUENCE" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MAX SUM WITHOUT ADJACENTS" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MAXIMUM SUM OF ELEMENTS NOT PART OF LIS" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SMALLEST SUM CONTIGUOS SUBARRAY" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

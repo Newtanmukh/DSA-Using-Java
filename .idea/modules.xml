@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ARRAYS  SEARCH SORTING/ARRAYS  SEARCH SORTING.iml" filepath="$PROJECT_DIR$/ARRAYS  SEARCH SORTING/ARRAYS  SEARCH SORTING.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BACK TRACKING/BACK TRACKING.iml" filepath="$PROJECT_DIR$/BACK TRACKING/BACK TRACKING.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DP/DP.iml" filepath="$PROJECT_DIR$/DP/DP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DSA-Using-Java.iml" filepath="$PROJECT_DIR$/DSA-Using-Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GRAPH/GRAPH.iml" filepath="$PROJECT_DIR$/GRAPH/GRAPH.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MATH/MATH.iml" filepath="$PROJECT_DIR$/MATH/MATH.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SLIDING WINDOW/SLIDING WINDOW.iml" filepath="$PROJECT_DIR$/SLIDING WINDOW/SLIDING WINDOW.iml" />
+      <module fileurl="file://$PROJECT_DIR$/STACK &amp; QUEUES/STACK &amp; QUEUES.iml" filepath="$PROJECT_DIR$/STACK &amp; QUEUES/STACK &amp; QUEUES.iml" />
+    </modules>
+  </component>
+</project>

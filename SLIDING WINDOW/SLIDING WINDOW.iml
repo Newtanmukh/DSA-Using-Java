@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/(V.V.V.V. IMP.) MAXIMUM OF ALL SUBARRAYS OF SIZE K" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/COUNT OCCURENCES OF ANAGRAMS" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/COUNT PAIRS IN ARRAY DIVISIBLE BY K" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/EQUIVALENT SUBARRAYS" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/FIRST NEGATIVE INTEGER IN EVERY WINDOW OF SIZE K" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LARGEST SUBARRAY OF 0 AND 1" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LARGEST SUBARRAY OF 0 SUM" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LENGTH OF LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LONGEST DISTINCT CHARACTERS IN STRING" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LONGEST K UNIQUE CHARACHTERS SUBSTRING" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LONGEST SUBARRAY WITH SUM K" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MAX SUM SUBARRAY OF SIZE K" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MAXIMIZE NUMBER OF 1s" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/NUMBER OF SUBARRAYS WITH SUM K" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SMALLEST WINDOW SUBSTRING" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SUBARRAY WITH 0 SUM" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SUBSTRINGS OF LENGTH K WITH K-1 DISTINCT CHARACTERS" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
