@@ -1,0 +1,26 @@
+1️⃣ Why hashCode must be overridden (not optional)
+
+    What you said would be true only if equals() were also identity-based.
+
+    But once you override equals() to mean:
+
+    two Pairs are equal if (h, m, prev) are equal
+
+    then hashCode() must agree with it.
+
+    Java rule (hard requirement):
+
+    If a.equals(b) == true, then
+    a.hashCode() == b.hashCode() must also be true(must point to same bucket, but vice versa not true)
+
+    If you override only equals:
+
+    two logically equal Pairs land in different buckets
+
+    HashMap never even calls equals
+
+    containsKey() fails → memoization breaks → TLE
+
+So:
+❌ override only equals → still broken
+✅ override both → memoization actually works
