@@ -15,11 +15,11 @@ class Solution {
         if(sum < arr[idx-1]){
             dfs(sum, list, idx-1, arr);
         }else{
-            dfs(sum, list, idx-1, arr);
-
             list.add(arr[idx-1]);
             dfs(sum-arr[idx-1], list, idx, arr);
             list.remove(list.size() - 1);
+
+            dfs(sum, list, idx-1, arr);
         }
 
     }
