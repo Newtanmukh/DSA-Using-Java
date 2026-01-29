@@ -1,0 +1,152 @@
+https://www.geeksforgeeks.org/problems/dyck-path1028/1
+
+
+1️⃣ Dyck Paths (Canonical Definition)
+
+Problem statement
+
+Count the number of lattice paths from (0,0) to (n,n) using only moves
+U = (0,1) and R = (1,0) such that at every point
+#U ≥ #R.
+
+
+
+2️⃣ Valid Parentheses
+
+Problem statement
+
+How many strings of n pairs of parentheses are correctly matched?
+
+
+
+3️⃣ Binary Search Trees (BSTs)
+
+Problem statement
+
+How many structurally unique BSTs can be formed using keys 1..n?
+
+
+
+
+
+
+
+4️⃣ Full Binary Trees
+
+Problem statement
+
+How many full binary trees exist with n internal nodes
+(every node has 0 or 2 children)?
+
+
+
+
+
+
+
+5️⃣ Polygon Triangulation
+
+Problem statement
+
+In how many ways can a convex polygon with n+2 vertices be triangulated?
+
+
+
+
+
+
+
+6️⃣ Non-Crossing Handshakes
+
+Problem statement
+
+2n people sit around a circular table.
+Each person shakes hands with exactly one other person.
+No handshakes cross.
+How many ways?
+
+
+
+
+
+
+
+
+7️⃣ Stack Permutations
+
+Problem statement
+
+In how many ways can elements 1..n be pushed and popped from a stack
+such that pop order is valid?
+
+
+
+
+
+
+
+
+
+
+
+8️⃣ Mountain Ranges
+
+Problem statement
+
+A mountain range consists of n upstrokes / and n downstrokes \
+such that the path never goes below the ground.
+
+
+
+
+
+
+9️⃣ Expression Parenthesization
+
+Problem statement
+
+In how many ways can an expression with n+1 operands
+be fully parenthesized?
+
+Example:
+
+((a·b)·c)
+(a·(b·c))
+
+
+
+
+
+
+10️⃣ Chord Diagrams
+
+Problem statement
+
+Given 2n points on a circle, how many ways can we draw n non-intersecting chords?
+
+
+
+
+11️⃣ Heap-Ordered Trees
+
+Problem statement
+
+How many ways can a binary heap be built with n distinct keys?
+
+
+
+
+
+
+
+
+
+12️⃣ Plane Rooted Trees
+
+Problem statement
+
+Count the number of rooted trees with n edges where children order matters.
+
+
+
+
