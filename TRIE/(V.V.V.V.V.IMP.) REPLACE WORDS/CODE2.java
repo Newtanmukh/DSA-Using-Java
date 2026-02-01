@@ -51,21 +51,16 @@ class Solution {
         char[] ch = word.toCharArray();
         StringBuilder sb = new StringBuilder();
         for(char c: ch){
-            int idx = c - 'a';
-
-            if(node.children[idx] == null){
+            int i = c - 'a';
+            if(node.children[i]==null){
                 return word;
-            }
-
-            node = node.children[idx];
-            sb.append(c);
-
-            if(node.isEnd){
-                return sb.toString();
+            }else{
+                sb = sb.append(c);
+                node = node.children[i];
+                if(node.isEnd)
+                    return sb.toString();
             }
         }
-
         return word;
     }
-
 }
