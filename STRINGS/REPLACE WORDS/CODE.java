@@ -7,8 +7,7 @@ class CODE {
 
         Map<String, Integer> map = new HashMap<>();
 
-        for(int i=0; i<dictionary.size(); i++){
-            String word = dictionary.get(i);
+        for (String word : dictionary) {
             map.put(word, 1);
         }
 
