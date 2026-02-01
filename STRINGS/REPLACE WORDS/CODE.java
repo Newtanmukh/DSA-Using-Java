@@ -1,4 +1,6 @@
-class Solution {
+import java.util.*;
+
+class CODE {
     public String replaceWords(List<String> dictionary, String sentence) {
 
         String[] words = sentence.split(" ");
@@ -33,6 +35,6 @@ class Solution {
             sb.append(" ");
         }
 
-        return sb.toString().substring(0, sb.toString().length()-1);
+        return sb.substring(0, sb.toString().length()-1);
     }
 }
