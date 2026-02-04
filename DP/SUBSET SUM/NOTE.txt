@@ -1,0 +1,17 @@
+4️⃣ Final answer to the big question
+“Why terminate at sum == 0 instead of sum == 0 && idx == 0?”
+
+Because for non-negative arrays:
+
+sum == 0 is a terminal truth, not a checkpoint.
+
+And DP relies on:
+
+States with the same meaning must return the same value.
+
+(sum=0, idx=100) and (sum=0, idx=1) mean the same thing:
+
+“A valid subset already exists.”
+
+
+
