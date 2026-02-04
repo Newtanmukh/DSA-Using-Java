@@ -1,0 +1,108 @@
+First, define the problem clearly
+
+mat has k sorted arrays
+
+Let total number of elements across all arrays be N
+
+Assume arrays are roughly similar size unless stated otherwise
+
+✅ Version 1: Divide & Conquer (merge like merge-sort)
+mergeArrays(0, k-1)
+→ recursively merge halves
+
+⏱ Time Complexity
+
+This behaves like merge sort on k arrays.
+
+Each element participates in log k merges
+
+Each merge is linear in elements merged
+
+👉 Time: O(N log k)
+
+💾 Space Complexity
+
+Recursion stack: O(log k)
+
+Temporary arrays created during merges: O(N)
+
+👉 Space: O(N) auxiliary
+
+👍 Pros
+
+Asymptotically faster
+
+Scales well when k is large
+
+Standard optimal solution
+
+👎 Cons
+
+More complex
+
+Recursive
+
+Harder to write bug-free in interviews
+
+⚠️ Version 2: Sequential merging (one by one)
+ans = merge(ans, mat[0])
+ans = merge(ans, mat[1])
+ans = merge(ans, mat[2])
+...
+
+⏱ Time Complexity
+
+This is the killer.
+
+Worst case:
+
+merge size 1 + size 2
+merge size 2 + size 3
+merge size 3 + size 4
+...
+
+
+Total work:
+
+≈ N + 2N + 3N + ... ≈ kN
+
+
+👉 Time: O(Nk) (worst case)
+If arrays are equal-sized → O(N²)
+
+💾 Space Complexity
+
+New ArrayList every merge
+
+Temporary storage grows every time
+
+👉 Space: O(N), but with more reallocations
+
+👍 Pros
+
+Very easy to understand
+
+Iterative
+
+Fewer moving parts
+
+👎 Cons
+
+Becomes very slow as k grows
+
+Repeated copying of large arrays
+
+🔥 Direct comparison
+Aspect	Divide & Conquer	Sequential Merge
+Time	O(N log k) ✅	O(Nk) ❌
+Space	O(N)	O(N)
+Scalability	Excellent	Poor
+Code simplicity	Medium	Easy
+Interview preference	⭐⭐⭐⭐	⭐⭐
+🧠 Intuition (easy mental model)
+
+Sequential merge:
+“Keep re-reading the entire book every time you add a new chapter”
+
+Divide & conquer:
+“Merge chapters in pairs, then merge the merged chapters”
