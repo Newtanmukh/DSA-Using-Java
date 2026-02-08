@@ -1,0 +1,15 @@
+
+//problem desc: https://www.geeksforgeeks.org/problems/rearrange-an-array-with-o1-extra-space3142/1
+class Solution {
+    public void arrange(long[] arr) {
+        int n = arr.length;
+        int temp[]=new int[n];
+        int j=0;
+        for(int i=0;i<n;i++){
+            temp[i]=(int)arr[(int)arr[i]];
+        }
+        for(int k=0;k<n;k++){
+            arr[k]=temp[k];
+        }
+    }
+}
