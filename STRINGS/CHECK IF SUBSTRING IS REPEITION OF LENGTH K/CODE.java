@@ -1,3 +1,5 @@
+import java.util.HashSet;
+
 // User function Template for Java
 //problem desc: https://www.geeksforgeeks.org/problems/check-if-a-string-is-repetition-of-its-substring-of-k-length3302/1
 class CODE {
@@ -17,10 +19,11 @@ class CODE {
         HashSet<String> set = new HashSet<>();
         set.add(sub);
         for(int i=k; i<n; i=i+k){
-            if(!s.substring(i, i+k).equals(sub)){
+            String substring = s.substring(i, i + k);
+            if(!substring.equals(sub)){
                 cnt++;
             }
-            set.add(s.substring(i, i+k));
+            set.add(substring);
         }
 
         if(set.size()==1)
