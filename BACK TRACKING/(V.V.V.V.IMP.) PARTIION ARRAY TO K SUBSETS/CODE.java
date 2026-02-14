@@ -1,0 +1,49 @@
+
+
+//problem desc: https://www.geeksforgeeks.org/problems/partition-array-to-k-subsets/1
+class CODE {
+    public boolean isKPartitionPossible(int[] a, int k) {
+        // Your code here
+
+        int sum=0;
+        int n = a.length;
+        for(int i=0; i<a.length; i++){
+            sum+=a[i];
+        }
+
+        if(k>n || sum%k!=0){
+            return false;
+        }
+
+        boolean[] flag=new boolean[n];
+        sum/=k;
+        boolean ans=find(sum,a,n,k,0,flag);
+        return ans;
+    }
+
+    public boolean find(int sum,int[] a,int n,int k,int currsum,boolean[] flag){
+        if(currsum>sum){
+            return false;
+        }
+
+        if(k==0){
+            return true;
+        }
+
+        if(currsum==sum){
+            return find(sum,a,n,k-1,0,flag);
+        }
+
+        for(int i=0; i<n; i++){
+            if(!flag[i]){
+                flag[i]=true;
+                if(find(sum,a,n,k,currsum+a[i],flag)){
+                    return true;
+                }
+                flag[i]=false;
+            }
+        }
+
+        return false;
+    }
+}
