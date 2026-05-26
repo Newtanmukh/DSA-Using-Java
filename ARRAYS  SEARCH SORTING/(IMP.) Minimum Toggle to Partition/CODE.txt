@@ -1,0 +1,32 @@
+class Solution {
+    int minToggle(int[] arr) {
+
+        int zeroTillNow = 0;
+        int oneTillNow = 0;
+        int ans = arr.length;
+
+        int totalZero = 0;
+        int totalOne = 0;
+
+        for(int x: arr){
+            if(x==0)
+                totalZero++;
+            else
+                totalOne++;
+        }
+
+        ans = Math.min(ans, oneTillNow + totalZero-zeroTillNow);
+
+        for(int x: arr){
+
+            if(x==0)
+                zeroTillNow++;
+            else
+                oneTillNow++;
+
+            ans = Math.min(ans, oneTillNow + totalZero-zeroTillNow);
+        }
+
+        return ans;
+    }
+}
